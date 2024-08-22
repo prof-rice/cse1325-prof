@@ -1,0 +1,19 @@
+printf 'JFLAGS += \n'
+printf 'JC = javac\n\n'
+
+printf 'info:\n\t@echo\n'
+printf '\t@printf '"'"'Type e.g., "make auto"  to create "auto.class" from auto.java\\n'"'"'\n'
+printf '\t@printf '"'"'Type       "make all"   to create every class file\\n'"'"'\n'
+printf '\t@printf '"'"'Type       "make clean" to delete every class file\\n\\n'"'"'\n\n'
+
+
+FILES=
+for f in *.java ; do
+  FILES="$FILES ${f%.java}"
+  printf '%s: %s\n' ${f%.java} $f
+  printf '\t-$(JC) $(JFLAGS) %s\n' $f
+  printf '\t@printf "Now type java %s to execute the result\\n\\n"\n\n' ${f%.java} 
+done
+printf 'all: %s\n\n' "$FILES"
+printf 'clean:\n\trm -f *.class %s\n\n' "$FILES"
+

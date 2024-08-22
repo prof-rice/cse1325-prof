@@ -1,0 +1,6 @@
+Hello, World - Hello.java (filename requirements) - any type in println, + operator
+   Omit ln for same line, use printf like C
+JavaInput - using Scanner (nextInt)
+, next, and nextLine) and using Console
+
+
