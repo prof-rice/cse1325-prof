@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<project name="Hello Project" default="build">
+  <presetdef name="javac">
+    <javac includeantruntime="false" />
+  </presetdef>
+
+  <target name="build" description="Compile source tree java files">
+    <javac debug="true" failonerror="true">
+      <src path="."/>
+    </javac>
+  </target>
+  
+  <target name="clean" description="Clean output files">
+    <delete>
+      <fileset dir=".">
+        <include name="**/*.class"/>
+      </fileset>
+    </delete>
+  </target>
+</project>
