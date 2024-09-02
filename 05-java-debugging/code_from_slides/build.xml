@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project name="CSE1325" default="build">
+
+  <target name="build" description="Compile source tree java files">
+    <javac includeantruntime="false" debug="true" failonerror="true">
+      <src path="."/>
+    </javac>
+  </target>
+
+  <target name="javadoc" description="Build JavaDoc">
+    <javadoc packagenames="qlogger.*"
+           sourcepath="."
+           excludepackagenames="com.dummy.test.doc-files.*"
+           defaultexcludes="yes"
+           destdir="docs/api"
+           author="true"
+           version="true"
+           use="true"
+           windowtitle="Qlogger API">
+      <doctitle><![CDATA[<h1>Complex</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright &#169; 2021 Professor George F. Rice. Licensed as CC BY-SA International 4.0</i>]]></bottom>
+      <tag name="license.agreement" scope="all" description="Licensed under:"/>
+    </javadoc>
+  </target>
+  
+  <target name="clean" description="Clean output files">
+    <delete dir="docs/api"/>
+    <delete dir="docs"/>
+    <delete>
+      <fileset dir=".">
+        <include name="**/*.class"/>
+      </fileset>
+    </delete>
+  </target>
+</project>
