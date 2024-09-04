@@ -1,0 +1,54 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Library {
+ - books : ArrayList<Book>  
+ + addBook(book : Book)
+}
+
+class Book {
+ - pages : ArrayList<Paper>  
+ + Book(size : int)
+}
+
+Class Person {
+ # name : string
+}
+
+class Patron {
+ - libraries : ArrayList<Library>  
+ + addLibrary(library : Library)
+}
+
+class Checkout {
+  - patron : Patron
+  - book   : Book
+  + Checkout(book : Book, patron : Patron)
+}
+
+class Paper {
+ -text : String
+ +Paper()
+ +Paper(text : String)
+}
+
+package java.lang {
+  class String {
+  }
+}
+
+package java.util {
+  class ArrayList {  
+  }
+}
+
+Patron "1..*" --> "1..*" Library : belongs >
+Patron -|> Person
+Library o- Book
+Book *- Paper
+(Patron, Book) .. Checkout
+Book ..> ArrayList 
+Library ..> ArrayList
+Paper o-- String
+@enduml
