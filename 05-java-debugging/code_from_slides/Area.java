@@ -1,7 +1,7 @@
 class Area {
     public static int area(int length, int width) {  // calculate area of a rectangle
         // length and width must be positive
-        if (length <= 0 || width <= 0) throw new IllegalArgumentException("Bad area");
+        if (length < 0 || width < 0) throw new IllegalArgumentException("Bad area");
         int result = length*width;
         if (result < 0) throw new IllegalArgumentException("Bad area");
         return result;
