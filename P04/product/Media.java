@@ -40,7 +40,7 @@ public class Media {
      * The value of points varies depending on the deal currently offered
      * on the MOES website.
      *
-     * @returns        the cost in points 
+     * @return        the cost in points 
      * @since          1.0
      */
     public int getPoints() {
@@ -53,7 +53,7 @@ public class Media {
      * of Items in the Order, and the total price of the Order.
      * Sales tax is not included at this time.
      *
-     * @returns     the title with parenthetical url and points
+     * @return     the title with parenthetical url and points
      * @since       1.0
      */
     @Override
