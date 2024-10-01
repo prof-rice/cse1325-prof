@@ -1,0 +1,163 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+package mdi {
+
+class Main {
+  -moes : Moes
+  -output : String
+  -menu : Menu
+--
+  -addStudent()
+  -listStudents()
+..
+  -addMedia()
+  -playMedia()
+  -listMedia()
+  -listAvailablePoints()
+  -buyPoints()
+..
+  {static} main(args : String[]) 
+  -endApp()
+}
+
+class MenuItem #D3D3D3 extends Runnable {
+  -menuText : Object
+  -menuResponse : Runnable
+  +MenuItem(menuText : Object, menuResponse : Runnable)
+  +toString() : String <<override>>
+  +run() <<override>>
+}
+
+class Menu #D3D3D3 {
+  -items : MenuItem[] <<ArrayList>>
+  +addMenuItem(item : MenuItem)
+  +toString() : String <<override>>
+  +run(itemNumber : int)
+}
+
+Note as N3
+  You may use Menu and MenuItem
+  from Lecture 10 without attribution.
+  Runnable is in package java.lang.
+end Note
+
+
+class Runnable <<interface>> #D3D3D3 {
+  +{abstract} run()
+}
+
+}
+
+package moes {
+
+class Moes {
+ -library : Media[]
+ -customers : Student[]
+--
+ +addMedia(media : Media)
+ +getMediaList() : String
+..
+ +addStudent(student : Student)
+ +getStudentList() : String
+ +getPoints(studentIndex) : int
+ +buyPoints(studentIndex : int, points : int) : String
+ +playMedia(studentIndex : int, mediaIndex : int) : String
+}
+
+}
+
+package product {
+
+class Media #D3D3D3 {
+ -title : String
+ -url : String
+ -points : int
+ +Media(title : String, url : String, points : int)
+ +getPoints() : int
+ +toString() : String <<override>>
+}
+
+note as N1
+  Write JavaDoc for 
+  (at least) this class
+end note
+
+
+N1 . Media
+MenuItem --o Menu
+Main - Menu
+Main - MenuItem
+
+
+}
+
+package customer {
+
+class Student #D3D3D3 {
+ -name : string
+ -id : int
+ -email : string
+ -account : Account
+ +Student(name : string, id : int, email : string, unlimited : boolean)
+ +requestMedia(media : Media) : String
+ +getAccount() : Account
+ +toString() : String <<override>>
+}
+
+abstract class Account <<abstract>> #D3D3D3 {
+ -accountNumber : int
+ -{static} nextAccountNumber : int
+ +Account()
+ +getAccountNumber() : int
+ +{abstract} play(media : Media) : String
+}
+
+class Alacarte {
+ -pointsRemaining : int
+ +buyPoints(points : int)
+ +getPointsRemaining() : int
+ +play(media : Media) : String <<override>>
+}
+
+class Unlimited  {
+ +play(media : Media) : String <<override>>
+}
+
+}
+
+package test {
+
+class CheckP04 {
+ +{static} main(args : String[])
+}
+
+class TestStudent #D3D3D3 {
+ +{static} main(args : String[])
+}
+
+class TestAccount #D3D3D3 {
+ +{static} main(args : String[])
+}
+
+class TestMedia #D3D3D3 {
+ +{static} main(args : String[])
+}
+
+TestStudent -[hidden] TestAccount
+
+}
+
+Alacarte -|> Account
+Account <|- Unlimited
+
+Account --* Student
+
+Moes o-- Media 
+Moes o-- Student
+
+Media -- TestMedia
+Student -- TestStudent
+
+@enduml
