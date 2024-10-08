@@ -1,0 +1,216 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+package moes {
+
+class Moes #FFFFFF {
+ -library : Media[]
+ -customers : Student[]
+--
+ +<color:#red>Moes()
+ +<color:#red>Moes(br : BufferedReader)
+ +<color:#red>save(bw : BufferedWriter)
+..
+ +addMedia(media : Media)
+ +getMediaList() : String
+..
+ +addStudent(student : Student)
+ +getStudentList() : String
+ +getPoints(studentIndex) : int
+ +buyPoints(studentIndex : int, points : int) : String
+ +playMedia(studentIndex : int, mediaIndex : int) : String
+}
+
+}
+
+package product {
+
+class Media #FFFFFF {
+ -title : String
+ -url : String
+ -points : int
+--
+ +Media(title : String, url : String, points : int)
+ +<color:#red>Media(br : BufferedReader)
+ +<color:#red>save(bw : BufferedWriter)
+..
+ +getPoints() : int
+ +toString() : String <<override>>
+}
+
+}
+
+package customer {
+
+class Student #FFFFFF  {
+ -name : string
+ -id : int
+ -email : string
+ -account : Account
+--
+ +Student(name : string, id : int, email : string, unlimited : boolean)
+ +<color:#red>Student(br : BufferedReader)
+ +<color:#red>save(bw : BufferedWriter)
+..
+ +requestMedia(media : Media) : String
+ +getAccount() : Account
+ +toString() : String <<override>>
+}
+
+abstract class Account <<abstract>> #FFFFFF {
+ -accountNumber : int
+ -{static} nextAccountNumber : int
+--
+ +<color:#red>Account()
+ +<color:#red>Account(br : BufferedReader)
+ +<color:#red>save(bw : BufferedWriter)
+..
+ +getAccountNumber() : int
+ +{abstract} play(media : Media) : String
+}
+
+class Alacarte #FFFFFF {
+ -pointsRemaining : int
+--
+ +<color:#red>Alacarte()
+ +<color:#red>Alacarte(br : BufferedReader)
+ +<color:#red>save(bw : BufferedWriter)
+..
+ +buyPoints(points : int)
+ +getPointsRemaining() : int
+ +play(media : Media) : String <<override>>
+}
+
+class Unlimited #FFFFFF {
+ +<color:#red>Unlimited()
+ +<color:#red>Unlimited(br : BufferedReader)
+ +<color:#red>save(bw : BufferedWriter)
+..
+ +play(media : Media) : String <<override>>
+}
+
+}
+package test {
+
+class CheckP04 #D3D3D3 {
+ +{static} main(args : String[])
+}
+
+class TestStudent #D3D3D3 {
+ +{static} main(args : String[])
+}
+
+class TestAccount #D3D3D3 {
+ +{static} main(args : String[])
+}
+
+class TestMedia #D3D3D3 {
+ +{static} main(args : String[])
+}
+
+TestStudent -[hidden] TestAccount
+
+}
+
+Alacarte -|> Account
+Account <|- Unlimited
+
+Account --* Student
+
+Moes o-- Media 
+Moes o-- Student
+
+Media -- TestMedia
+Student -- TestStudent
+
+package mdi {
+
+class Main #FFFFFF {
+  -moes : Moes
+  -output : String
+  -menu : Menu
+  -running : boolean
+  -<color:#red>{static} extension : String <<final>>
+  -<color:#red>filename : String
+--
+  -<color:#red>newMoes()
+  -<color:#red>save()
+  -<color:#red>saveAs()
+  -<color:#red>open()
+..
+  -addStudent()
+  -listStudents()
+..
+  -addMedia()
+  -playMedia()
+  -listMedia()
+  -listAvailablePoints()
+  -buyPoints()
+..
+  +Main()
+  +{static} main(args : String[]) 
+  -mdi()
+  -endApp()
+}
+
+class MenuItem #D3D3D3 implements Runnable {
+  -menuText : Object
+  -menuResponse : Runnable
+  +MenuItem(menuText : Object, menuResponse : Runnable)
+  +toString() : String <<override>>
+  +run() <<override>>
+}
+
+class Menu #D3D3D3 {
+  -items : MenuItem[] <<ArrayList>>
+  +addMenuItem(item : MenuItem)
+  +toString() : String <<override>>
+  +run(itemNumber : int)
+}
+
+class Runnable <<interface>> #D3D3D3 {
+  +{abstract} run()
+}
+
+}
+
+package moes {
+
+class Moes #FFFFFF {
+ -library : Media[]
+ -customers : Student[]
+--
+ +<color:#red>Moes()
+ +<color:#red>Moes(br : BufferedReader)
+ +<color:#red>save(bw : BufferedWriter)
+..
+ +addMedia(media : Media)
+ +getMediaList() : String
+..
+ +addStudent(student : Student)
+ +getStudentList() : String
+ +getPoints(studentIndex) : int
+ +buyPoints(studentIndex : int, points : int) : String
+ +playMedia(studentIndex : int, mediaIndex : int) : String
+}
+
+}
+ 
+Main *-- Moes
+
+MenuItem - Main
+Menu - Main
+MenuItem -- Menu
+
+Note as N5
+  New class members are in red font.
+
+  Remember that IOException is checked!
+end Note
+
+N5 -- Account
+N5 -- Alacarte
+N5 -- Unlimited
+
+@enduml
