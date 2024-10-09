@@ -1,0 +1,36 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+interface Iterable { }
+
+interface Collection extends Iterable { }
+
+interface Set extends Collection { }
+
+interface SequencedCollection extends Collection { }
+
+interface SequencedSet extends SequencedCollection { }
+
+interface SortedSet { }
+
+Set <|-- SortedSet
+Set <|- SequencedSet
+
+SequencedSet <|-- SortedSet
+
+interface List extends SequencedCollection { }
+
+interface Queue extends Collection { }
+
+interface Deque { }
+
+Queue <|-- Deque
+SequencedCollection <|-- Deque
+
+interface Map { }
+
+interface SortedMap extends SequencedMap { }
+
+interface SequencedMap extends Map { }
+@enduml
