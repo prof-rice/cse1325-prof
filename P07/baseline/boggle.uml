@@ -1,0 +1,81 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+interface Comparable<T> {
+  + compareTo(o : T)
+}
+class Position {
+  + row : int <<final>>
+  + column : int <<final>>
+--
+  + Position(row : int, column : int)
+..
+  + toString() : String <<override>>
+  + compareTo(that : Position) <<override>>
+  + equals(o : Object) boolean <<override>>
+  + hashCode() : int <<override>>
+}
+
+Class Solution {
+  - boardNumber : Integer
+  - word : String
+  - startingPosition : Position
+  - moves : String
+  - threadNumber : int
+--
+  + Solution(boardNumber : Integer, word String, startingPosition : Position, threadNumber : int)
+  + Solution(solution : Solution, move : int)
+..
+  + toString() : String <<override>>
+  + compareTo(that : Position) <<override>>
+  + equals(o : Object) boolean <<override>>
+  + hashCode() : int <<override>>
+}
+
+class Solver {
+  - board : Board
+  - {static} nextBoardNumber : int
+  - boardNumber : int
+  - threadNumber : int
+  - verbose : int
+  + Solver(board : Board, threadNumber : int, verbose : int)
+  + solve(word : String) : Solution
+  - findNextChar(partialWord : String, position : Position, partialSolution : Solution)
+  - log(s : String, int : verboseLevel)
+}
+
+class Board {
+  - board : String[]
+  - {static} validChars : String
+  - {static} random : Random
+  + {static} moves : int[] <<final>>
+  + Board(boardSize : int)
+  + Board(board : String[])
+  + boardSize() : int
+  + get(position : Position)
+  + move(position : Position, offset : int)
+..
+  + toString() : String <<override>>
+  + equals(o : Object) boolean <<override>>
+  + hashCode() : int <<override>>
+}
+
+class Boggle {
+  - {static} boards : Board[] <<ArrayList>>
+  - {static} words : String[] <<ArrayList>>
+  - {static} solutions : Solution[] <<TreeSet>>
+  + {static} main(args : String[])
+}
+
+Comparable <|-[dashed] Position : <Position>
+Comparable <|-[dashed]- Solution : <Solution>
+
+Position --o Solution
+Solution -> Solver
+Solver o- Board
+
+Boggle *-- Solution
+Boggle -- Solver
+Boggle *-- Board
+@enduml
