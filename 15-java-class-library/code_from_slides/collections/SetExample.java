@@ -1,11 +1,12 @@
+import java.util.Set;
 import java.util.HashSet;
 import java.util.TreeSet;
 import java.util.Scanner;
 
 public class SetExample {
     public static void main(String[] args) {
-        HashSet<String> words = new HashSet<>();
-        TreeSet<String> sortedWords = new TreeSet<>();
+        Set<String> words = new HashSet<>();
+        Set<String> sortedWords = new TreeSet<>();
         Scanner in = new Scanner(System.in);
         
         System.out.print("Enter a sentence: ");
