@@ -1,0 +1,13 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Pair <K, V> {
+-key : K
+-value : V
++Pair(key :K, value : V)
++getKey() : K
++getValue() : V
+}
+@enduml
+

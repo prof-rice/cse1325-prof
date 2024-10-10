@@ -1,0 +1,16 @@
+3
+fruit
+4011
+Bananas
+0.69
+2.11
+dairy
+21000001927
+8 oz Medium Cheddar
+3.29
+2
+dairy
+68692400160
+Skim Milk (gallon)
+2.69
+1
