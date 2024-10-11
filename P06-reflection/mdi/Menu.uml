@@ -1,0 +1,26 @@
+@startuml
+skinparam classAttributeIconSize 0
+' skinparam backgroundColor #D3D3D3
+hide circle
+
+class Runnable {
+  +{abstract} run()
+}
+
+class MenuItem extends Runnable {
+  -menuText : Object
+  -menuResponse : Runnable
+  +MenuItem(menuText : Object, menuResponse : Runnable)
+  +toString() : String <<override>>
+  +run() <<override>>
+}
+
+class Menu {
+  -items : MenuItem[] <<ArrayList>>
+  +addMenuItem(item : MenuItem)
+  +toString() : String <<override>>
+  +run(itemNumber : int)
+}
+
+Menu o- MenuItem
+@enduml
