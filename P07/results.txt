@@ -30,7 +30,7 @@ QUESTION 3: Does adding more threads continue to speed up the program? Do more t
 
 QUESTION 4: Does adding more threads increase the "system load", or is it constant regardless of the number of threads?  Why?
 
-Yes, from 0.285 seconds to 1.667 seconds for this data set
+
 
 
 
