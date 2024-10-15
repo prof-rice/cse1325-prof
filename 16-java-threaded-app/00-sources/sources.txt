@@ -1,0 +1,28 @@
+Writing a Threaded, Object-Oriented, Graphical User Interface Application
+
+Mandelbrot equation (in complex plane x+yi):
+
+  f(z) = z² + c
+  
+If the absolute value of the function does not diverge when calculated recursively, the value c is a member of the Mandelbrot set.
+We can use the number of iterations of the function before the absolute value exceeds a value (we'll use 2) 
+    to determine the color of a pixel (x, y) that corresponds to the constant x+yi.
+
+
+Code for Mandlelbrot set calculations can be found on the Internet at the following locations:
+
+* This link provides Mandelbrot implementations in every language you've ever seen and a lot you have not! Bash? Seriously???
+
+https://rosettacode.org/wiki/Mandelbrot_set
+
+* The classic freeware fractint implementation for DOS (and DOSBox under Windows) with a native port to Linux
+
+https://www.fractint.org/
+
+* This is a good public domain implementation in C
+
+http://www.physics.emory.edu/faculty/weeks/software/mand.html
+
+
+
+
