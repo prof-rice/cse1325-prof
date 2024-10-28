@@ -1,0 +1,17 @@
+printf 'CXXFLAGS = --std=c++17\n\n'
+printf 'info:\n\t@echo\n'
+printf '\t@printf '"'"'Type e.g., "make auto"  to create program "auto"\\n'"'"'\n'
+printf '\t@printf '"'"'Type       "make all"   to create every program\\n'"'"'\n'
+printf '\t@printf '"'"'Type       "make clean" to delete every program\\n\\n'"'"'\n\n'
+
+
+FILES=
+for f in *.cpp ; do
+  FILES="$FILES ${f%.cpp}"
+  printf '%s: %s\n' ${f%.cpp} $f
+  printf '\t-$(CXX) $(CXXFLAGS) -o %s %s\n' ${f%.cpp} $f
+  printf '\t@printf "Now type ./%s to execute the result\\n\\n"\n\n' ${f%.cpp} 
+done
+printf 'all: %s\n\n' "$FILES"
+printf 'clean:\n\trm -f *.o *.gch a.out %s\n\n' "$FILES"
+

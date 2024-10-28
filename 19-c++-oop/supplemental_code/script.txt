@@ -1,0 +1,21 @@
+01_enum.cpp                    - Enum months
+02_named_enum.cpp              - + Month
+03_enum_variables.cpp          - + Month month = JUL
+04_enum_to_string.cpp          - + to_string array
+05_enum_to_string_vector.cpp   - ~ const static vector to_string
+06_enum_to_string_function.cpp - + enum Size +overloaded to_string fns
+07_enum_to_string_switch.cpp   - ~ vector to switch
+08_enum_iteration.cpp          - + for iter month=JAN month<=DEC casts
+
+10_enum_class.cpp                - ~enum Size to enum class
+11_enum_class_map.cpp            - -Size ~vector/switch to map
+12_struct.cpp                    - +struct Date 1969 JUL 20
+13_struct_switch.cpp             - +to_string(Date) 12 APR 1961 ++space.day (!)
+14_class.cpp                     - ~struct to class, data val, ~to_string to method
+15_init_list.cpp                 - ~assignments to init list, fix space Date
+16_def_decl.cpp                  - ~split declarations and definitions
+17_date.h 17_date.cpp main.cpp   - ~split into separate files w/guard
+
+20_test_shadow.cpp through 24_   - Explore shadowing and name conflicts
+
+Makefile                         - Add for separate compilation

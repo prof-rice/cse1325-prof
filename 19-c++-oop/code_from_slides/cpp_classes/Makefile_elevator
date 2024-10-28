@@ -1,0 +1,20 @@
+CXXFLAGS += --stdc++17
+
+all: elevators
+
+debug: CXXFLAGS += -g
+debug: elevators
+
+rebuild: clean elevators
+
+elevators: elevator_main.o elevator.o
+	$(CXX) $(CXXFLAGS) elevator_main.o elevator.o -o elevators
+
+elevator_main.o: elevator_main.cpp *.h
+	$(CXX) $(CXXFLAGS) -c elevator_main.cpp
+
+elevator.o: elevator.cpp *.h
+	$(CXX) $(CXXFLAGS) -c elevator.cpp
+
+clean:
+	rm -f *.o *.gch ~* a.out elevators
