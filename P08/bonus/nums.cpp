@@ -9,12 +9,8 @@ int main(int argc, char* argv[]) {
         std::string s{argv[i]};
         if(isdigit(s[0])) numbers.push_back(s);
         else words->push_back(s);
+        // (*words).push_back(s);
     }
-    
-    std::sort(words.begin(), words.end());
-    
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::shuffle(numbers->begin(), numbers->end(),std::default_random_engine(seed));
     
     std::cout << "Numbers:\n";
     for(auto s : numbers) std::cout << s << '\n';
