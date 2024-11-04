@@ -1,0 +1,11 @@
+Reminder: SI sessions
+
+00_main.cpp  baseline calendar
+01_main.cpp  operator<< for Month
+02_main.cpp  operator>> for Month
+03_main.cpp  operator<< & >> for Date
+04_main.cpp  comparisons <=>
+05_main.cpp  pre- and post-increment
+06_main.cpp  operator+=(int)
+07_main.cpp  operator+(int)
+
