@@ -27,5 +27,7 @@
  test_extreme_bonus_subscripts.o: test_extreme_bonus_subscripts.cpp *.h
 	$(CXX) $(CXXFLAGS) -c test_extreme_bonus_subscripts.cpp -o test_extreme_bonus_subscripts.o
 
+ all: bank test_full_credit test_extreme_bonus_pound test_extreme_bonus_subscripts
+
  clean:
 	-rm -f *.o *.gch *~ a.out bank test_full_credit test_extreme_bonus_pound test_extreme_bonus_subscripts

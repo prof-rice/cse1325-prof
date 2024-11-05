@@ -15,5 +15,7 @@ test_full_credit: test_full_credit.o purse.o *.h
 test_full_credit.o: test_full_credit.cpp *.h
 	$(CXX) $(CXXFLAGS) -c test_full_credit.cpp -o test_full_credit.o
 
+ all: bank test_full_credit
+ 
  clean:
 	-rm -f *.o *.gch *~ a.out bank test_full_credit

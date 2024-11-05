@@ -21,5 +21,7 @@
  test_bonus.o: test_bonus.cpp *.h
 	$(CXX) $(CXXFLAGS) -c test_bonus.cpp -o test_bonus.o
 
+ all: bank test_full_credit test_bonus
+ 
  clean:
 	-rm -f *.o *.gch *~ a.out bank test_full_credit test_bonus

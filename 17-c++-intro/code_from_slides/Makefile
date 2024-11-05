@@ -7,7 +7,6 @@ info:
 	@printf 'Type       "make clean" to delete every program\n\n'
 
 auto: auto.cpp
-	@printf "### Expect error: declaration of 'auto duh' has no initializer"
 	-$(CXX) $(CXXFLAGS) -o auto auto.cpp
 	@printf "Now type ./auto to execute the result\n\n"
 
@@ -36,13 +35,16 @@ declare_invoke_define: declare_invoke_define.cpp
 	@printf "Now type ./declare_invoke_define to execute the result\n\n"
 
 decl_no_def: decl_no_def.cpp
-	@printf "### Expect error: undefined reference to sqrt(double)\n"
 	-$(CXX) $(CXXFLAGS) -o decl_no_def decl_no_def.cpp
 	@printf "Now type ./decl_no_def to execute the result\n\n"
 
 getline: getline.cpp
 	-$(CXX) $(CXXFLAGS) -o getline getline.cpp
 	@printf "Now type ./getline to execute the result\n\n"
+
+hello: hello.cpp
+	-$(CXX) $(CXXFLAGS) -o hello hello.cpp
+	@printf "Now type ./hello to execute the result\n\n"
 
 manipulators: manipulators.cpp
 	-$(CXX) $(CXXFLAGS) -o manipulators manipulators.cpp
@@ -72,8 +74,8 @@ sizeof: sizeof.cpp
 	-$(CXX) $(CXXFLAGS) -o sizeof sizeof.cpp
 	@printf "Now type ./sizeof to execute the result\n\n"
 
-all:  auto call_by_reference call_by_value cin constants cout declare_invoke_define decl_no_def getline manipulators math mixed_right mixed_wrong multi_input oops sizeof
+all:  auto call_by_reference call_by_value cin constants cout declare_invoke_define decl_no_def getline hello manipulators math mixed_right mixed_wrong multi_input oops sizeof
 
 clean:
-	rm -f *.o *.gch a.out  auto call_by_reference call_by_value cin constants cout declare_invoke_define decl_no_def getline manipulators math mixed_right mixed_wrong multi_input oops sizeof
+	rm -f *.o *.gch a.out  auto call_by_reference call_by_value cin constants cout declare_invoke_define decl_no_def getline hello manipulators math mixed_right mixed_wrong multi_input oops sizeof
 
