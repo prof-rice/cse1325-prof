@@ -1,0 +1,31 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Reading #ffff00 {
+-_hour : int
+-_temp : double
++Reading(hour : int, temp : double)
++Reading()
++hour() : int
++temp() : double
++operator>>(ist : istream&, reading : Reading&) : istream& <<friend>>
++operator<<(ist : ostream&, reading : Reading& <<const>>) : ostream& <<friend>>
+-validate()
+}
+
+class Readings #ffff00{
+-_readings : Reading[] <<vector>>
++Readings(ist : istream&)
++size() : int
++operator[](index : int) : Reading&
++graph() : string
+}
+
+class Temps #ffff00 {
++{static} main(argc : int, argv : char*[])
+}
+
+Temps - Readings
+Readings *-- Reading
+@enduml
