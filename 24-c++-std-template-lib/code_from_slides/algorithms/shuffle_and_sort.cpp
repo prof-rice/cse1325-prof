@@ -24,8 +24,8 @@ int main() {
     std::cout << std::endl;
 
     // Sort first 25 elements in reverse order using lambda compare function
-    std::sort(v.begin(), v.begin()+10, [ ] (int lhs, int rhs) {return rhs < lhs;});
-    std::cout << "Rev sort ½: ";
-    for(auto i : v) std::cout << std::setw(3) << i;
-    std::cout << std::endl;
+    // std::sort(v.begin(), v.begin()+10, [ ] (int lhs, int rhs) {return rhs < lhs;});
+    // std::cout << "Rev sort ½: ";
+    // for(auto i : v) std::cout << std::setw(3) << i;
+    // std::cout << std::endl;
 }

@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iterator>
 #include <iostream>
+#include <vector>
 
 int main() {
     std::vector<int> v;
