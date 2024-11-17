@@ -1,0 +1,4 @@
+Triangle 3 4 5
+Rectangle 4 5 4 5
+Hexagon 2 2 2 2 2 2
+Irregular 4 6 8 10
