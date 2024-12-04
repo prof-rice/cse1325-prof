@@ -1,0 +1,132 @@
+* 00_sources
+
+Discuss history of Mandelbrot Set: 
+    f(z) = z² + c in the complex plane. 
+    If the function does not iteratively diverge, it belongs in the set
+    If we use (x,y) coordinates in a plane to plot the set members, the result is... interesting!
+Where to find implementations
+Let's write our own!
+
+How to display easily? Howzabout the Plain Portable Pix Map (ppm) file!
+* Plain ASCII text file, with maximum of 70 characters per line
+* Whitespace formatted (perfect for stream in!)
+* A '#' word means the remaining words until a newline are comments
+* First word MUST be "P3" exactly
+* Second and third words are the width and height (respectively) of the image in pixels
+* Fourth word is the maximum color value for any channel (r, g, or b), usually 255 or 65535
+* Remaining word triplets are the red, green, and blue values of the colors for each pixel
+
+Here's an example file
+
+P3
+# feep.ppm
+4 4
+15
+ 0  0  0    0  0  0    0  0  0   15  0 15
+ 0  0  0    0 15  7    0  0  0    0  0  0
+ 0  0  0    0  0  0    0 15  7    0  0  0
+15  0 15    0  0  0    0  0  0    0  0  0
+
+* 01_one_thread
+
+Explain class Mandelbrot
+Explain main.cpp
+Run with default values and display image.ppm
+    time ./mandelbrot
+    time ./mandelbrot 1000 1000 500 - takes longer, duller image
+
+* 02_threads
+
+Now we throw some threads at the problem
+Mandelbrot class - use meld to discuss differences
+> Since rows are independent and in an array, no mutex is required
+Open system monitor AND
+    for threads in 1 2 4 12 ; do time ./mandelbrot 1080 1080 500 $threads image${threads}.ppm; done
+
+* 03_thread_pool
+
+Now we'll let the threads allocate work to themselves collaboratively (explain thread pool)
+Mandelbrot class - use meld to discuss differences
+> Since _row is changed by more than one thread, a mutex is required!
+Open system monitor AND
+    for threads in 1 2 4 12 ; do time ./mandelbrot 1080 1080 500 $threads image${threads}.ppm; done
+> For greater numbers of threads, the pool works more efficiently
+
+* 04_gtkmm
+
+Rather than create a file, we can use gtkmm to display a static image of the Mandlebrot set
+Mainwin contains only a canvas
+Canvas includes a fixed-size Gdk::Pixbuf, which can be manipulated at the pixel level
+    set_pixel will handle a single pixel at a time (called from Mandelbrot)
+    on_draw paints the pixbuf onto the canvas
+Mandelbrot 
+    We include both hard allocation of rows to threads and thread pools as an option
+    We include a shuffle mode with a vector of row numbers to calculate the rows in random order
+    A new generate method delays start of pixel generation until our Gtk::PixBuf is ready!
+Main
+    PROBLEM: We must instance Mandelbrot in a new thread, but it will start generating pixels immediately
+        -- BEFORE our Mainwin class runs and constructs the Canvas to draw them!
+    CHEAP HACK: Sleep Mandelbrot's thread for a second to let Mainwin get ready (THIS MAY FAIL)
+Run with default values
+    ./mandelbrot 1000 1000 60 12 1 1
+
+* 05_queue
+
+To get rid of the sleeper hack, we need a thread-safe queue - enter Queue
+    PROBLEM: To check of something can be popped may allow another thread to pop it! Enter std::optional
+    PROBLEM: Manipulating std::queue may throw exception! Enter lock_guard
+Pixel just holds (x,y) and color for the queue
+Canvas
+    set_pixel now simply pushes the pixel onto the Queue - drawing moved to monitor_queue
+    PROBLEM: What causes Canvas to pull pixels from the Queue? No notify. So... monitor_queue() thread!
+    Boolean set to false will cause thread to exit and be joined back in the destructor
+    We no longer know when a row is complete - but we can queue_draw whenever pixels are changed
+
+* 06_transform
+
+Now we'd like to be able to *interact* with our Mandelbrot set!
+Mandelbrot
+    Add getters and setters to interactively change the view
+    Use mutex locks to data updates to avoid write corruption
+    Add _scale and _offsets
+    Adjust calculate_point to handle translations
+Canvas
+    Change updated flag to enable updating while being drawn
+Can't really test this one - wait for initial GUI!
+
+* 07_gui
+
+Back to our standard main.cpp - WOOT!
+Mandlebrot
+    Instead of a one-shot generate, we now will generate on command - so configuration moves to the generate method 
+Mainwin
+    Mainwin has similar problem to Canvas needing a non-gtkmm thread to handle incoming Pixels from the Queue -
+        Mainwin needs a non-gtkmm thread to manage generation of the Pixels! _gthread is that thread, created in constructor.
+    If you watched Lecture 26, you'll recognize a simple state machine based on enum class Gen
+        WAIT means do not generate yet
+        GENERATE kicks off a Mandelbrot generation
+        EXIT signals the thread to exit so it can be joined in ~Mainwin
+    We also create our first GUI interface elements, using HBox instead of Toolbar so Scales and SpinButtons can be used
+    
+* 08_full_gui
+
+Here we finish out our GUI
+    Scales for X and Y offsets, and a Spinbutton for icount
+    We add a ToggleToolButton to enable auto-refresh as the controls are adjusted
+    The sliders are coded for quadratic to give greater precesion at lesser values
+PROBLEM: In generate, changing data during generation could leave screen partly rendered
+    Use _delta to determine if data changed during generate - if so, generate again
+nthreads is supported but not part of the GUI at this time
+
+Added debug target to Makefile - subtle excape path in calculate_rows enabled an unexpected exception to leave a mutex locked
+    Every 5 minutes or so, the app would just lock up. This is unfortunately not unusual in threaded apps!
+    
+Future plans
+    Address "narrowing conversions" warnings eventually (believe them to be benign)
+    Pixbuf doesn't resize automatically - may need to create & populate new pixbuf on resize? (width/height hooks in place)
+    Really wanted to be able to select a rectangle with a mouse to zoom (similar to rubber band Point feature)
+    Really wanted to save images to a PNG file
+    Would like a color option, typically implemented using HSV instead of RGB with teh value in Hue
+    Save and load settings for interesting views
+    
+    
