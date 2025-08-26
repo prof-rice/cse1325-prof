@@ -1,0 +1,32 @@
+ricegf@antares:~/dev/202108/P01/bonus$ ls
+Hello1.png  HelloConsole.java  Hello.java
+ricegf@antares:~/dev/202108/P01/bonus$ javac HelloConsole.java 
+ricegf@antares:~/dev/202108/P01/bonus$ java HelloConsole 
+What is your name? George
+Hello, George!
+ricegf@antares:~/dev/202108/P01/bonus$ java HelloConsole 
+What is your name? Professor Rice
+Hello, Professor Rice!
+ricegf@antares:~/dev/202108/P01/bonus$ java HelloConsole 
+What is your name? 王李
+Hello, 王李!
+ricegf@antares:~/dev/202108/P01/bonus$ java HelloConsole 
+What is your name? عَبْدُ الله
+Hello, عَبْدُ الله!
+ricegf@antares:~/dev/202108/P01/bonus$ java HelloConsole 
+What is your name? ǝɔᴉɹ ɹossǝɟoɹԀ
+Hello, ǝɔᴉɹ ɹossǝɟoɹԀ!
+ricegf@antares:~/dev/202108/P01/bonus$ java HelloConsole 
+What is your name? 🏫  👨‍🌾  🍚 
+Hello, 🏫  👨‍🌾  🍚 !
+ricegf@antares:~/dev/202108/P01/bonus$ cat HelloConsole.java 
+public class HelloConsole {
+    public static void main(String[] args) {
+        System.out.println("Hello, " 
+            + System.console().readLine("What is your name? ")
+            + "!");
+    }
+}   
+ricegf@antares:~/dev/202108/P01/bonus$ scrot -s Hello2.png
+ricegf@antares:~/dev/202108/P01/bonus$ 
+
