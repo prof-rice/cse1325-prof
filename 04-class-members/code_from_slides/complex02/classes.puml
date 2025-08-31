@@ -1,0 +1,18 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Complex {
+ - a : double
+ - b : double
+ + Complex(a : double, b : double)
+ + toString() : String <<override>>
+}
+
+class TestComplex {
+ + {static} main(args : String[])
+}
+
+TestComplex - Complex
+
+@enduml

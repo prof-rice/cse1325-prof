@@ -1,0 +1,31 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+enum Form <<enum>> {
+  CARTESIAN
+  POLAR
+}
+
+class Complex {
+ - {static} form : Form
+ - a : double
+ - b : double
+ + Complex(a : double, b : double)
+ + Complex()
+ + {static} setForm(form : Form)
+ + {static} getForm() : Form
+ + magnitude() : double
+ + toString() : String <<override>>
+ + equals(o : Object) : boolean <<override>>
+}
+
+class TestComplex {
+ +{static} main(args : String[])
+}
+
+TestComplex -- Complex
+Form --+ Complex
+
+@enduml
+
