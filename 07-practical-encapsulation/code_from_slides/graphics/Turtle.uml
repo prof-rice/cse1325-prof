@@ -1,0 +1,26 @@
+@startuml
+skinparam classAttributeIconSize 0
+set separator none
+hide circle
+
+class Turtle {
+ -x : double
+ -y : double
+ -angle : double
+ -penIsDown : boolean
+--
+ +Turtle(x : double, y : double, degrees : double)
+ +Turtle()
+..
+ +penUp()
+ +penDown()
+ +turn(degrees : double)
+ +forward(distance : double)
+ +teleport(x : double, y : double, degrees : double)
+..
+ + getX() : double
+ + getY() : double
+ + getAngle() : double
+ + penIsDown() : boolean
+}
+@enduml

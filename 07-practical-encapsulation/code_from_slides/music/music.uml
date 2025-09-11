@@ -1,0 +1,49 @@
+@startuml
+skinparam classAttributeIconSize 0
+set separator none
+hide circle
+
+package javax.sound.midi {
+class MidiSystem
+class Synthesizer
+}
+
+enum Pitch <<enum>> {
+C
+D♭
+D
+E♭
+E
+F
+G♭
+G
+A♭
+A
+B♭
+B
+..
+-string : String
+-value : int
+--
+-Pitch(string : String, value : int)
++toValue() : int
++toString() : String <<override>>
+}
+class Note {
+-pitch : Pitch
+-octave : int
+-{static} channel : MidiChannel
++Note()
++Note(pitch : Pitch, octave : int)
++play()
++toString() : String <<override>>
+}
+class Song {
+    +{static} main(args : String[])
+}
+
+Note - Pitch
+Song -- Note
+Synthesizer -- Note
+MidiSystem -- Note
+@enduml

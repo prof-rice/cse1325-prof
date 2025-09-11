@@ -1,0 +1,21 @@
+@startuml
+skinparam classAttributeIconSize 0
+set separator none
+hide circle
+
+class Spirograph {
+  -R : double
+  -r : double
+  -p : double
+  +Spirograph(innerRingRadius : double, wheelRadius : double, penRadius : double)
+  +draw(tStart : double, tEnd : double, count : int, multicolored : boolean)
+  -fx(t : double) : double
+  -fy(t : double) : double
+}
+
+class Spyro {
+  +{static} main(args : String[])
+}
+
+Spyro - Spirograph
+@enduml

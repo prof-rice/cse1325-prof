@@ -1,0 +1,46 @@
+@startuml
+skinparam classAttributeIconSize 0
+set separator none
+hide circle
+
+class StdDraw {
+ +{static} AQUA,BLACK,BLUE,CYAN,FUSCIA,DARK_GRAY,GRAY,GREEN,LIGHT_GRAY,LIME,MAGENTA,MAROON : Color
+ +{static} NAVY,OLIVE,ORANGE,PINK,PURPLE,RED,SILVER,TEAK,WHITE,YELLOW,TRANSPARENT : Color
+ +{static} UTA_ORANGE,UTA_BLUE : Color
+ +{static} COLORWHEEL : Color[]
+--
+ +{static} setTitle(title : String) 
+ +{static} set[X|Y]Scale([min : double, max : double])
+ +{static} clear([backgroundColor : Color])
+ +{static} getBackgroundColor() : Color
+ +{static} setPenRadius([radius : double])
+ +{static} getPenRadius() : double
+ +{static} setPenColor([red: int, green : int, blue : int])
+ +{static} setPenColor(color : Color)
+ +{static} nextPenColor()
+ +{static} getPenColor() : Color
+..
+ +{static} pixel(x : double, y : double)
+ +{static} line(x0 : double, y0 : double, x1 : double, y1 : double)
+ +{static} [filled]circle(x : double, y : double, radius : double)
+ +{static} [filled]ellipse(x : double, y : double, semiMajorAxis : double, semiMinorAxis : double)
+ +{static} [filled]arc(x : double, y : double, radius : double, angle1 : double, angle2 : double)
+ +{static} [filled]square(x : double, y : double, halfLength : double)
+ +{static} [filled]rectangle(x : double, y : double, halfWidth : double, halfHeight : double)
+ +{static} [filled]polygon(x : double[], y : double[])
+
+ +{static} picture(x : double, y : double, filename : String[, scaledWidth : double, scaledHeight : double][, degrees : double])
+ +{static} text(x : double, y : double, text : String[, degrees : double])
+..
+ +{static} enableDoubleBuffering()
+ +{static} show()
+ +{static} pause(milliseconds : int)
+..
+ +{static} isMousePressed() : boolean
+ +{static} mouseX() : double
+ +{static} mouseY() : double
+ +{static} isKeyPressed(keyCode int) : boolean
+ +{static} hasNextKeyTyped() : boolean
+ +{static} nextKeyTyped() : char
+}
+@enduml

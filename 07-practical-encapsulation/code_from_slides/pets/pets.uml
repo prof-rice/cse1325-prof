@@ -1,0 +1,35 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+enum Type <<enum>> {
+    DOG(12)
+    CAT(15)
+    FISH(4)
+    BIRD(13)
+    ==
+- lifespan : double
+    --
+- Type(lifespan : double)
++ lifespan() : double
+}
+
+
+class Pet {
+-name   : String
+-age    : double
+-type   : Type
+-{static} humanLifespan : double = 80 <<final>>
++Pet(name : String, age : double, type  : Type)
++humanAge() : double
++toString() : String
+}
+
+class MyPets {
++{static} main(args : String[])
+}
+
+Pet -right- Type
+MyPets -right- Pet
+
+@enduml

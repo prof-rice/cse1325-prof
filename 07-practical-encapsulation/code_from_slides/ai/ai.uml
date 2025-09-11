@@ -1,0 +1,52 @@
+@startuml
+skinparam classAttributeIconSize 0
+set separator none
+hide circle
+
+class Query {
+ +{static} main(args : String[])
+}
+
+enum Engine {
+ Eliza
+ Phind
+ Brave
+ Komo
+}
+
+class AI {
+  - engine : engine
+  - queries : List<String>
+  - eliza : Eliza
+  + AI(engine : Engine)
+  + query(query : String) : String
+  + getQueryHistory() : Stack
+  + isFinished() : boolean
+}
+
+package java.util {
+class List <E> {
+ + List()
+ + add(value : E)
+}
+}
+
+Note left of List::add
+ E is String
+end note
+
+package eliza {
+class Eliza {
+ + welcome : String
+ + farewell : String
+ + Eliza()
+ + processInput(question : String) : String
+ + finished() : boolean
+}
+}
+
+Query *- AI
+AI *- Engine
+AI *-- List
+AI *-- Eliza
+@enduml
