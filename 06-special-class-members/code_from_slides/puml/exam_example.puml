@@ -1,0 +1,19 @@
+@startuml
+' The next 3 lines are NOT required on the exam!
+skinparam classAttributeIconSize 0
+set separator none
+hide circle
+
+class Clock {
+ - unit : TimeUnit
+ - value : int
+ + Clock(unit : TimeUnit, value : int)
+ + tic()
+}
+enum TimeUnit {
+  DAYS
+  HOURS
+  MINUTES
+}
+Clock - TimeUnit
+@enduml

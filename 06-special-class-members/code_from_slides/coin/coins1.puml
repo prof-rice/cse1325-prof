@@ -1,0 +1,54 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+enum Denomination <<enum>> {
+ Penny
+ Nickel
+ Dime
+ Quarter
+ HalfDollar
+ Dollar
+}
+enum Grade <<enum>> {
+ Poor
+ Fair
+ Good
+ VeryGood
+ Fine
+ Uncirculated
+ Mint
+}
+enum USMint <<enum>> {
+ Philadelphia
+ Denver
+ SanFrancisco
+ WestPoint
+}
+class Coin {
+ - {static} firstYear : int <<final>>
+ - denom : Denomination
+ - mint : USMint
+ - year : int
+ - grade : Grade
+
+ + Coin(denom : Denomination, mint : USMint, year : int, grade : Grade)
+' + Coin()
+ + toString() : String <<override>>
+ + equals(o : Object) : boolean <<override>>
+}
+
+class CoinCollection {
+ -{static} coins : Coin[]
+ -{static} printCoins()
+ +{static} main(args : String[])
+}
+
+Denomination -+ Coin
+Coin +- Grade
+USMint --+ Coin
+CoinCollection --> Coin
+
+@enduml
+
+
