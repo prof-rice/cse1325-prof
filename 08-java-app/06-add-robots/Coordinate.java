@@ -1,0 +1,71 @@
+/*
+ Class Coordinate - Models a location on a 2D grid.
+
+ @author      George F. Rice
+ @copyright   Copyright 2017-2025
+ @version     3.0
+
+ This file is part of Roving Robots.
+
+ Roving Robots is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ Roving Robots is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with Roving Robots.  If not, see <https://www.gnu.org/licenses/>.
+*/ 
+ 
+import java.util.Random;
+import java.util.Objects;
+
+public class Coordinate {
+    public static final int maxX = 29;
+    public static final int maxY = 29;
+    
+    public Coordinate(int x, int y) {
+        this.x = x;
+        this.y = y;
+        validate(Direction.STAY);
+    }
+   public Coordinate() {
+        this(rand.nextInt(maxX), rand.nextInt(maxY));
+    }
+    public void addTo(Direction direction) {
+        validate(direction);
+        x += direction.deltaX;
+        y += direction.deltaY;
+    }
+    public void validate(Direction direction) {
+        int newX = x + direction.deltaX;
+        int newY = y + direction.deltaY;
+        if(newX < 0 || newX > maxX) throw new RuntimeException("Invalid X: " + newX);
+        if(newY < 0 || newY > maxY) throw new RuntimeException("Invalid Y: " + newY);
+    }
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
+    }
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(o == null || o.getClass() != getClass()) return false;
+        Coordinate c = (Coordinate) o;
+        return x == c.x
+            && y == c.y;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    private int x;
+    private int y;
+    private static Random rand = new Random(0XC0FFEE);
+}
+

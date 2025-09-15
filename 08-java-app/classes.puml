@@ -1,0 +1,83 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Coordinate {
+-x : int
+-y : int
++{static} maxX : int <<final>>
++{static} maxY : int <<final>>
++Coordinate(x : int, y : int)
++Coordinate()
++directionTo(c: Coordinate) : Direction
++addTo(direction : Direction)
++toString() : String <<override>>
++equals(o : Object) : boolean <<override>>
++hashCode() : int <<override>>
+-validate()
+}
+
+enum Direction <<enum>> {
++UP(0,-1)
++UP_RIGHT(1,-1)
++RIGHT(1,0)
++DOWN_RIGHT(1,1)
++DOWN(0,1)
++DOWN_LEFT(-1,1)
++LEFT(-1,0)
++UP_LEFT(-1,-1)
++STAY(0,0)
++deltaX : int <<final>>
++deltaY : int <<final>>
+-Direction(x : int, y: int)
+}
+
+class Robot {
+-coordinate : Coordinate
+-isAlive : boolean
++Robot(coordinate : Coordinate)
++getCoordinate() : Coordinate
++move(direction : Direction)
++isAlive() : boolean
++kill()
++toString() : String <<override>>
+}
+
+class Grid {
+-player : Robot
+-robots : Robot[]
++Grid(numRobots : int)
++movePlayer(direction : Direction)
++teleportPlayer()
++animateRobots()
++detectCollisions()
++playerIsAlive() : boolean
++anyRobotIsAlive() : boolean
++toString() : String <<override>>
+}
+
+class Game {
+-grid : Grid
++Game(numRobots : int)
++cli()
++executeCommand(cmd : char) : boolean
++clearScreen()
++printBanner()
++printGrid()
++printHelp()
++printExplosion()
++printTrophy()
+}
+
+class RovingRobots {
++{static}main(args : String[]) 
+}
+
+RovingRobots -> Game
+Game -> Grid
+Grid -> Robot
+Robot --> Coordinate
+Direction <- Coordinate
+Robot --> Direction
+Grid --> Direction
+@enduml

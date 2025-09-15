@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project name="CSE1325" default="build">
+
+  <target name="build" description="Compile source tree java files">
+    <javac includeantruntime="false" debug="true" failonerror="true">
+      <src path="."/>
+    </javac>
+    <exec executable="make" dir="." />
+  </target>
+
+  <target name="javadoc" description="Compile source tree java files">
+      <javadoc packagenames="package.*"
+           sourcepath="."
+           defaultexcludes="yes"
+           destdir="docs/api"
+           author="true"
+           version="true"
+           use="true"
+           windowtitle="API">
+      <doctitle><![CDATA[<h1>Complex</h1>]]></doctitle>
+    </javadoc>
+  </target>
+  
+  <target name="clean" description="Clean output files">
+    <delete dir="docs/api"/>
+    <delete dir="docs"/>
+    <delete>
+      <fileset dir=".">
+        <include name="**/*.class"/>
+      </fileset>
+    </delete>
+    <exec executable="make" dir="." >
+      <arg value="clean"/>
+    </exec>
+  </target>
+</project>
