@@ -1,0 +1,67 @@
+@startuml
+set separator none
+skinparam classAttributeIconSize 0
+hide circle
+
+class CreatePolygon {
+ + {static} in : Scanner
+ + {static} main(args : String[])
+}
+
+class TestPolygon {
+ - {static} in : Scanner
+ - {static} rand : Random
+ + {static} main(args : String[])
+}
+
+class DrawPolygons {
+ - {static} in : Scanner
+ - {static} rand : Random
+ + {static} main(args : String[])
+}
+
+class Polygon {
+ + {static} MAX_SIDES : int <<final>>
+ - numSides : int
+ - points : Point[]
+ + addPoint(point : Point)
+ + perimeter() : double
+ + draw()
+ + toString() : String <<override>>
+ - {static} lineLength(p1 : Point, p2 : Point) : double  
+}
+
+class StdDraw {
+ +{static} BLACK,BLUE,CYAN,GRAY,GREEN,MAGENTA,MAROON : Color
+ +{static} ORANGE,PINK,PURPLE,RED,WHITE,YELLOW,TRANSPARENT : Color
+ +{static} UTA_ORANGE,UTA_BLUE : Color
+--
+ +{static} setScale(min : double, max : double)
+ +{static} setPenRadius(radius : double)
+ +{static} setPenColor(red: int, green : int, blue : int)
+ +{static} setPenColor(color : Color)
+ +{static} nextPenColor()
+..
+ +{static} line(x0 : double, y0 : double, x1 : double, y1 : double)
+}
+
+class Point {
+ - x : double
+ - y : double
+ + Point(x : double, y : double)
+ + Point()
+ + getX() : double
+ + getY() : double
+ + equals(o : Object) : boolean <<override>>
+ + hashCode() : int <<override>>
+ + toString() : String <<override>>
+}
+
+Polygon - Point
+TestPolygon - Polygon
+CreatePolygon -- Polygon
+CreatePolygon -[hidden] DrawPolygons
+DrawPolygons -- Polygon
+DrawPolygons - StdDraw
+@enduml
+
