@@ -1,0 +1,59 @@
+
+                                ===============
+                                Unicode Decoder
+                                ===============
+
+In Unicode, a Basic Multilingual Plane (BMP) character is a 16-bit value 
+(0 to 65535 or 0xFFFF, written by linguists as U+FFFF), and represented 
+by the char or Character Java type. Java calls these 16-bit values 
+"Unicode code unit".
+
+Supplemental characters have values greater than 65535 or 0xFFFF, and can 
+only be represented as an int, char[2], or a pair of char in a Java String. 
+Java and linguists call all 1-word and 2-word characters a "Unicode code point".
+
+Here are some examples to use in demostrating this program.
+
+Upper case characters:
+  LATIN CAPITAL LETTER DZ WITH CARON: U+1C4 Ǆ 
+  CHEROKEE LETTER ME: U+13BA Ꮊ 
+  ADLAM CAPITAL LETTER LAAM: U+1E902 𞤂 (supplemental - may not work)
+
+Lower case characters:
+  GREEK SMALL LETTER DELTA:  U+3B4 δ
+  ARMENIAN SMALL LETTER SHA: U+577 շ
+  
+Title case characters:
+  GREEK CAPITAL LETTER ALPHA WITH PROSGEGRAMMENI: U+1FBC ᾼ (often looks like Ai)
+  LATIN CAPITAL LETTER L WITH SMALL LETTER J: U+01C8 ǈ  (often looks like Lj)
+
+Digits:
+  DIGIT FOUR: U+34 4
+  ARABIC-INDIC DIGIT FOUR: U+664 ٤
+  EXTENDED ARABIC-INDIC DIGIT FOUR: U+6F4 ۴
+  
+NOT Digits - but shouldn't they be?
+  VULGAR FRACTION ONE QUARTER: U+BC ¼
+  CIRCLED DIGIT FOUR: U+2463 ④
+  DOUBLE CIRCLED DIGIT FOUR: U+24F8 ⓸
+  DIGIT FOUR FULL STOP: U+248B ⒋
+  PARENTHESIZED DIGIT FOUR: U+2477 ⑷
+  SEGMENTED DIGIT FOUR: U+1FBF4 🯴 (supplemental - may not work)
+  ROMAN NUMERAL FOUR: U+2163 Ⅳ 
+
+Other characters:
+  BITCOIN SIGN: U+20BF ₿
+  KANNADA SIGN SIDDHAM: U+C84 ಄
+  CJK UNIFIED IDEOGRAPHS 5B66: U+5B66 学
+  DEVANAGARI LETTER YA: U+92F य
+  HEBREW LETTER BET: U+5D1 ב
+  KEYBOARD: U+2328 ⌨
+
+Undefined characters:
+  Reserved for private (local) use: U+E000
+  Reserved non-characters: U+FFFE (signals big / little endian) and U+1FFFF
+  Undefined (as of Unicode 15): U+40000 (supplemental - may not work)
+
+The methods we'll examine below (except digit and forDigit) accept as a parameter
+either a char (code unit) or an int (code point).
+
