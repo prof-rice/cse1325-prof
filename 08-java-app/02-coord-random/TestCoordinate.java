@@ -1,5 +1,5 @@
 /*
- Class Coordinate - Models a location on a 2D grid.
+ Class TestCoordinate - Regression test for the Coordinate class.
 
  @author      George F. Rice
  @copyright   Copyright 2017-2025

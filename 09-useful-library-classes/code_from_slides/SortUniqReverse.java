@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class SortUniq {
+public class SortUniqReverse {
     public static void main(String[] args) {
         // Instance a new ArrayList to hold Integers
         ArrayList<Integer> ints = new ArrayList<>();
