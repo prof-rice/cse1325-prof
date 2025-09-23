@@ -1,0 +1,43 @@
+@startuml
+set separator none
+skinparam classAttributeIconSize 0
+hide circle
+
+class CreatePolygon {
+ + {static} in : Scanner
+ + {static} main(args : String[])
+}
+
+class TestPolygon {
+ - {static} in : Scanner
+ - {static} rand : Random
+ + {static} main(args : String[])
+}
+
+class Polygon {
+ + {static} MAX_SIDES : int <<final>>
+ - numSides : int
+ - points : Point[]
+ + addPoint(point : Point)
+ + perimeter() : double
+ + toString() : String <<override>>
+ - {static} lineLength(p1 : Point, p2 : Point) : double  
+}
+
+class Point {
+ - x : double
+ - y : double
+ + Point(x : double, y : double)
+ + Point()
+ + getX() : double
+ + getY() : double
+ + equals(o : Object) : boolean <<override>>
+ + hashCode() : int <<override>>
+ + toString() : String <<override>>
+}
+
+Polygon - Point
+CreatePolygon - Polygon
+TestPolygon -- Polygon
+@enduml
+
