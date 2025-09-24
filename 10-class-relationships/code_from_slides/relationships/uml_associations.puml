@@ -1,0 +1,70 @@
+@startuml
+set separator none
+skinparam classAttributeIconSize 0
+hide circle
+
+class LibraryManager {
+ - {static} library : Library
+ + {static} main(args : String[])
+}
+
+class Library {
+ - books : Book[] <<ArrayList>>
+ - patrons : Patron[] <<ArrayList>>
+ + addBook(book : Book)
+ + getBook(index : int) : Book
+ + addPatron() : Patron
+ + getPatron(index : int) : Patron
+}
+
+class Book {
+ - pages : Paper[] <<ArrayList>> 
+ + Book(numPfineages : int)
+}
+
+class Customer <<Interface>> {
+ + pay(amount : double)
+}
+
+class Person {
+ # name : String
+ + toString() : String <<override>>
+}
+
+class Patron {
+ - library : Library
+ + Patron(library : Library)
+ + pay(amount : double) <<override>>
+}
+
+class Checkout {
+  - patron : Patron
+  - book   : Book
+  - dueDate : ZonedDateTime
+  - returnedDate : ZonedDateTime
+  + Checkout(book : Book, patron : Patron) : boolean
+  + checkIn()
+  + getFine() : double
+}
+
+class Paper {
+ -text : String
+ +Paper(text : String)
+}
+
+package Java.util {
+  class ArrayList {  
+  }
+}
+
+LibraryManager "1 " --> "1 " Library : manages >
+LibraryManager -[hidden] Patron
+Customer <|.. Patron 
+Person <|-- Patron
+Patron "1..*  " o--* "1 " Library
+Library o- Book
+Book *- Paper
+(Patron, Book) .. Checkout
+Book ..> ArrayList 
+Library ..> ArrayList
+@enduml

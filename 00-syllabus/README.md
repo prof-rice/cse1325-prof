@@ -12,15 +12,13 @@ Each lecture, the ``code_from_slides`` subdirectory will contain compilable code
 For Java class ``Hello``, you'll find its code in file ``Hello.java``. For other code, you should be able to find the filename of the code somewhere near it on the slide.
 
 * Directories that I give you containing Java code will always include a build.xml file. Just type ``ant`` to build all of the code, and use ``java ClassName`` to run the main method in the specified class name.
-* Directories that I give you containing C++ or Python code will always include a Makefile. Just type ``make`` to build all of the code or at least obtain further instructions.
-
-If a directory contains both Java and C++ code, the Makefile will typically build both (as long as the Java is fairly simple), while the build.xml file invoked by ``ant`` will build only the Java code.
+* Directories that I give you containing C++ or Python code (very rare!) in addition to Java, a Makefile is provided. If you have installed a C++ build system, just type ``make`` to build all of the code or at least obtain further instructions. You can still use ``ant`` to build just the Java code, of course.
 
 See the README.md file (if any) in each subdirectory for more details.
 
 ## test_your_environment
 
-This directory (for this lecture only) contains code that will verify that you can build command line applications in Java as well as command line applications in C++. See the README.md file in the subdirectory for details.
+This directory (for this lecture only) contains code that will verify that you can build command line applications in Java. See the README.md file in the subdirectory for details.
 
 ## Searching for Keywords
 
