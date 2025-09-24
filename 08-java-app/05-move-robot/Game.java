@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Game {
     public Game() {
         this.grid = new Grid(0);
@@ -8,6 +10,7 @@ public class Game {
             try {
                 printGrid();
                 System.out.print("\nCommand: ");
+             // command = in.nextLine().getChar(0);
                 command = (char)System.in.read();
                 executeCommand(command);
             } catch (Exception e) {
@@ -37,4 +40,5 @@ public class Game {
     }
     private static String clearScreen = String.valueOf('\n').repeat(80);
     private Grid grid;
+    private Scanner in = new Scanner(System.in);
 }

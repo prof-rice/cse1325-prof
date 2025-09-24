@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Game {
     public Game(int numRobots) {
         this.grid = new Grid(numRobots);
@@ -8,12 +10,11 @@ public class Game {
             try {
                 printGrid();
                 System.out.print("\nCommand: ");
+             // command = in.nextLine().getChar(0);
                 command = (char)System.in.read();
                 executeCommand(command);
             } catch (Exception e) {
                 System.err.println("Invalid command: " + command);
-                e.printStackTrace();
-                System.exit(-1);
             }
         }
     }

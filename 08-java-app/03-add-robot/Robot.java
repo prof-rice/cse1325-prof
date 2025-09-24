@@ -31,6 +31,6 @@ public class Robot {
     public String toString() {
         return "robot" + coordinate;
     }
-    protected Coordinate coordinate;
+    private Coordinate coordinate;
 }
 
