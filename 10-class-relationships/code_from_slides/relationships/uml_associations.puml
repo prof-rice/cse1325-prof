@@ -19,7 +19,7 @@ class Library {
 
 class Book {
  - pages : Paper[] <<ArrayList>> 
- + Book(numPfineages : int)
+ + Book(numPages : int)
 }
 
 class Customer <<Interface>> {
