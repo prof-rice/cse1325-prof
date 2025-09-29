@@ -1,0 +1,35 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Shape {
+ +area() : double
+}
+
+class Circle extends Shape {
+ -radius : double
+ +Circle(radius : double)
+ +area() : double <<override>>
+ +toString() : String <<override>>
+}
+
+class Rectangle extends Shape {
+ -width : double
+ -height : double
+ +Rectangle(width : double, height : double)
+ +area() : double <<override>>
+ +toString() : String <<override>>
+}
+
+class Square extends Rectangle {
+ +Rectangle(size : double)
+ +toString() : String <<override>>
+}
+
+class Shapes {
+ +shapes : Shape[] <<ArrayList>>
+ +{static} main(args : String[])
+}
+
+Shape <- Shapes
+@enduml

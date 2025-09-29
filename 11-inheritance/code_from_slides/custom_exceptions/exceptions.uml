@@ -1,0 +1,41 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Exception #lightblue { }
+
+class IOException #orange  { }
+class FileNotFoundException #orange { }
+
+Exception <|- IOException
+IOException <|-- FileNotFoundException
+
+class RuntimeException #yellow { }
+Exception <|-- RuntimeException
+
+' RuntimeException <|- ArithmeticException
+ArithmeticException -|> RuntimeException
+RuntimeException <|-- IllegalArgumentException
+RuntimeException <|-- NullPointerException
+
+RuntimeException <|-- IndexOutOfBoundsException
+IndexOutOfBoundsException <|--ArrayIndexOutOfBoundsException
+
+RuntimeException <|-- NoSuchElementException
+NoSuchElementException <|-- InputMismatchException
+
+class ArithmeticException #yellow { }
+class IllegalArgumentException #yellow { }
+class NullPointerException #yellow { }
+
+' class IndexOutOfBoundsException extends RuntimeException { }
+class ArrayIndexOutOfBoundsException #yellow { }
+
+' class NoSuchElementException extends RuntimeException { }
+class InputMismatchException #yellow { }
+
+' FileNotFoundException -[hidden]- ArithmeticException
+' IOException -[hidden]- IndexOutOfBoundsException
+' RuntimeException -[hidden]- IOException
+
+@enduml

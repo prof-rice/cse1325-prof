@@ -1,0 +1,37 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Zombie {
+  # name : String
+  - age : int
+  ~ decay : double
+  + crawl()
+  + scratch()
+  + toString() : string
+}
+class Shambler extends Zombie {
+  + shamble()
+} 
+class Crawler extends Zombie {
+  + crawl()
+} 
+class FastZombie extends Zombie {
+  # speed : double
+  + run(speed : double)
+}
+class Groupie extends Zombie {
+  # nameObsessed : String
+}
+enum Salinity {
+  FRESH
+  SALT
+}
+class UnderwaterZombie extends Zombie {
+  - salinity : Salinity
+  + crawl()
+  + swim()
+}
+UnderwaterZombie -- Salinity
+@enduml
+
