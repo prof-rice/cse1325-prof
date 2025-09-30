@@ -1,0 +1,37 @@
+@startuml
+skinparam classAttributeIconSize 0
+' skinparam backgroundColor #D3D3D3
+hide circle
+
+class Runnable {
+  +{abstract} run()
+}
+
+package menu {
+class MenuItem {
+  - menuText : Object
+  - menuResponse : Runnable
+  + MenuItem(menuText : Object, menuResponse : Runnable)
+  + toString() : String <<override>>
+  +run() <<override>>
+}
+class Menu {
+  - items : List<MenuItem>
+--
+  + addMenuItem(item : MenuItem)
+  + run(itemNumber : int)
+  + toString() : String <<override>>
+..
+  + {static} getString(prompt : String) : String
+  + {static} getInt(prompt : String) : Integer
+  + {static} getDouble(prompt : String) : Double
+  + {static} getChar(prompt : String) : Character
+  + {static} getBoolean(prompt : String) : Boolean
+  + {static} selectItemFromArray(prompt : String, array : Object[]) : Integer
+  + {static} selectItemFromList(prompt : String, list : List) : Integer
+}
+}
+
+Runnable <|-- MenuItem
+Menu o- MenuItem
+@enduml
