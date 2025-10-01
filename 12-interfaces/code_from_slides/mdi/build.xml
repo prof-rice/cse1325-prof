@@ -15,7 +15,7 @@
            author="true"
            version="true"
            use="true"
-           windowtitle="abUTA API">
+           windowtitle="Menu API">
            <doctitle><![CDATA[<h1>Mavs abUTA Social Network</h1>]]></doctitle>
           <bottom><![CDATA[<i>Copyright &#169; 2025 Professor George F. Rice. Licensed as CC BY-SA International 4.0</i>]]></bottom>
           <tag name="license.agreement" scope="all" description="Licensed under:"/>

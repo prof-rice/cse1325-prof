@@ -12,7 +12,7 @@ class MenuItem {
   - menuResponse : Runnable
   + MenuItem(menuText : Object, menuResponse : Runnable)
   + toString() : String <<override>>
-  +run() <<override>>
+  + run() <<override>>
 }
 class Menu {
   # pre : Object

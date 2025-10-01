@@ -25,7 +25,7 @@ public class RockPaperScissorsLizardSpock {
         final String titleMenu = CLEAR + BORDER + NAME + BORDER + "\n" + menu + "\n\n";
         final String prompt = "\n\nChoose carefully! ";
         
-        // Main loop!
+        // Main loop! (See ExampleMenu for using Menu's main loop instead)
         while(true) {
             System.out.print(titleMenu + result + prompt);
             try {

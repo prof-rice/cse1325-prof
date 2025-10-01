@@ -80,7 +80,7 @@ import java.io.FilenameFilter;
  * @since              1.0
  * @license.agreement  MIT License
  */
-public class Menu {
+public class Menu implements Runnable {
 
     /**
      * Constructs a menu with no predefined text or menu items.
@@ -180,12 +180,13 @@ public class Menu {
      *
      * @since               1.2
      */
+    @Override
     public void run() {
         while(result != null) {
             try {
                 runOnce();
             } catch(Exception e) {
-                result.append("ERROR: Command failed");
+                result.append("\nERROR: Command failed\n");
             }
         }
     }
@@ -236,7 +237,7 @@ public class Menu {
         if(sb == null || addendum == null) return;
         else if(addendum.getClass().isArray()) for(var o : (Object[]) addendum) recursiveAppend(sb, o);
         else if(addendum instanceof Iterable)  for(var o : (Iterable) addendum) recursiveAppend(sb, o);
-        else sb.append(addendum);
+        else sb.append(addendum.toString() + '\n');
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -272,7 +273,7 @@ public class Menu {
                 if(s.isEmpty() && defaultInput != null) s = defaultInput;
                 break;
             } catch(Exception e) {
-                System.err.println("Invalid input!");
+                System.err.println("\nInvalid input: " + e.getMessage());
             }
         }
         if(cancelInput != null && s.equals(cancelInput)) s = null; 
@@ -347,7 +348,7 @@ public class Menu {
                 if(s != null && !s.isEmpty()) i = Integer.parseInt(s);
                 break;
             } catch(Exception e) {
-                System.err.println("Invalid input!");
+                System.err.println("\nInvalid input: " + e.getMessage());
             }
         }
         return i;
@@ -422,7 +423,7 @@ public class Menu {
                 if(s != null && !s.isEmpty()) d = Double.parseDouble(s);
                 break;
             } catch(Exception e) {
-                System.err.println("Invalid input!");
+                System.err.println("\nInvalid input: " + e.getMessage());
             }
         }
         return d;
@@ -498,7 +499,7 @@ public class Menu {
                 if(s != null && !s.isEmpty()) b = Boolean.parseBoolean(s);
                 break;
             } catch(Exception e) {
-                System.err.println("Invalid input!");
+                System.err.println("\nInvalid input: " + e.getMessage());
             }
         }
         return b;
@@ -574,7 +575,7 @@ public class Menu {
                 if(s != null && !s.isEmpty()) c = s.charAt(0);
                 break;
             } catch(Exception e) {
-                System.err.println("Invalid input!");
+                System.err.println("\nInvalid input: " + e.getMessage());
             }
         }
         return c;
@@ -853,7 +854,7 @@ public class Menu {
                     default: current = files[selection-4];
                 }
             } catch (Exception e) {
-                System.err.println("#### Error: " + e);
+                System.err.println("\nError selecting file: " + e.getMessage());
             }        
         }
         return current;
@@ -863,7 +864,7 @@ public class Menu {
      * This field collects results text for inclusion in the {@link post} array
      * 
      * The result object is null and ignored by default. If set non-null
-     * by application code, it will be cleared  each time {@link execute()} 
+     * by application code, it will be cleared  each time {@link runOnce()} 
      * is called. It is not automatically printed, however, but may be
      * included in the {@link post} array for data display below the menu,
      * like this:
@@ -872,7 +873,7 @@ public class Menu {
      * StringBuilder result = new StringBuilder();
      * Object[] post = new Object[]{result, "\n\nSelection?"};
      * menu = new Menu(pre, post);
-     * menu.result = result; // Set reference to clear on execute()
+     * menu.result = result; // Set reference to clear on runOnce()
      *
      * @since               1.2
      */

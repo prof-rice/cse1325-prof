@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 // See MenuItem.java and Menu.java for the keys to this approach!
+// (Also see ConciseMenu.java for taking full advantage of Menu)
 import menu.Menu;
 import menu.MenuItem;
 
