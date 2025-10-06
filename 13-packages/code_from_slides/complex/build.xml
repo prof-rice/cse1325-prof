@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<project name="CSE1325" default="compile" basedir=".">
+
+  <property name="appname" value="Complex"/>
+  <property name="author" value="Prof Rice"/>
+  <property name="license" value="Licensed as CC BY-SA International 4.0"/>
+                         <!-- OR "All rights reserved."/> for proprietary builds. -->
+  <property name="packages" value="complex.*"/> <!-- comma-separated, include .* on all -->
+  
+  <property name="src" location="src"/>
+  <property name="target" location="target"/>
+  <property name="doc" location="target/doc/api"/>
+  <property name="dist" location="dist"/>
+  
+  <target name="init">
+    <tstamp/>
+    <tstamp>
+        <format property="year" pattern="yyyy"/>
+    </tstamp>
+    <mkdir dir="${target}"/>
+  </target>
+
+  <target name="javadoc" description="create javadoc">
+      <javadoc packagenames="${packages}"
+           windowtitle="${appname}"
+           sourcepath="${src}"
+           destdir="${doc}"
+           defaultexcludes="yes"
+           author="true"
+           version="true"
+           use="true">
+      <doctitle><![CDATA[<h1>${appname}</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright &#169; ${year} ${author}. ${license}</i>]]></bottom>
+      <tag name="license.agreement" scope="all" description="Licensed under:"/>
+    </javadoc>
+  </target>
+ 
+  <target name="compile" depends="init,javadoc" description="compile the source and documentation">
+    <javac srcdir="${src}" destdir="${target}" 
+           includeantruntime="false" debug="true" failonerror="true"/>
+  </target>
+
+  <target name="dist" depends="compile" description="generate the distribution">
+    <mkdir dir="${dist}/lib"/>
+
+    <jar jarfile="${dist}/lib/${appname}-${DSTAMP}-${TSTAMP}.jar" basedir="${target}"/>
+  </target>
+
+  <target name="clean" description="clean up">
+    <delete dir="${doc}"/>
+    <delete dir="${target}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
