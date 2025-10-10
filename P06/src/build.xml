@@ -8,6 +8,7 @@
   </target>
 
   <target name="clean" description="Clean output files">
+    <delete dir="docs/api"/>
     <delete>
       <fileset dir=".">
         <include name="**/*.class"/>

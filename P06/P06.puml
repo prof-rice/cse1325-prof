@@ -1,0 +1,100 @@
+@startuml
+set separator none
+skinparam classAttributeIconSize 0
+hide circle
+
+class Comment {
+ - text : String
+ - author : Person
+ - inReplyTo : Comment
+ - replies : Comment[] <<ArrayList>>
+ + Comment(text : String, author : Person, inReplyTo : Comment)
+ + addReply(text : String, author : Person)
+ + numReplies() : int
+ + getReply(index : int) : Comment
+ + toString() : String <<override>>
+}
+
+interface Rateable <<interface>> #FFFF00 {
+ + addRating(rating : Rating)
+ + getAverageRating() : double
+ + getRatings() : Rating[]
+}
+
+
+class Rating {
+ - stars : int
+ - review : Comment
+ - Rating(stars : int, review : Comment)
+ + getStars() : int
+ + getComment() : Comment
+ + toString() : String <<override>>
+}
+
+class Person #ffffcf {
+ # name : String
+ # email : String
+ - ratings : Rating[] <<ArrayList>>
+ + Person(name : String, email : String)
+ + toString() : String <<override>>
+ + equals(o : Object) : boolean <<override>>
+ + hashCode() : int <<override>>
+..
+ + addRating(rating : Rating) <<override>>
+ + getAverageRating() : double <<override>>
+ + getRatings() : Rating[] <<override>>
+}
+class Student #FFFF00 {
+ - {static} nextStudentID : int
+ - studentID : int
+ - courses : Course[] <<ArrayList>>
+' - balanceOwed : int
+ + Student(name : String, email : String)
+ + addCourse(course : Course)
+ + getCourses() : Course[]
+ + toString() : String <<override>>
+}
+class Tutor #FFFF00 {
+ - bio : String
+ - ssn : int
+ - course : Course
+ + Tutor(name : String, email : String, ssn : int, bio : String, course : Course)
+ + getSSN() : int
+ + getBio() : String
+ + getCourse() : Course
+' - expertise : Subject[]
+'  - salary : int
+'  - availability : DateRange[]
+}
+
+class Course #FFFF00 {
+ -dept : String
+ -number : int
+ + Course(dept : String, number : int)
+ + toString() : String <<override>>
+ + equals(o : Object) : boolean <<override>>
+ + hashCode() : int <<override>>
+}
+class InvalidCourseException #FFFF00 {
+ + InvalidCourseException(dept : String)
+ + InvalidCourseException(dept : String, number : int)
+}
+
+package java.lang {
+class IllegalArgumentException #bfbfbf {
+ + IllegalArgumentException(s: String)
+}
+}
+
+Rating <- Rateable
+Rating --> Comment
+Comment -> Person
+
+Rateable <|.. Person
+Person <|-- Student
+Person <|-- Tutor
+Student o-- Course
+Tutor o-- Course
+InvalidCourseException <. Course
+IllegalArgumentException <|-- InvalidCourseException
+@enduml
