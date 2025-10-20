@@ -1,0 +1,56 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Runnable <<interface>> {
+  +{abstract} run()
+}
+
+package menu {
+class MenuItem #bfbfbf {
+  - menuText : Object
+  - menuResponse : Runnable
+  + MenuItem(menuText : Object, menuResponse : Runnable)
+  + toString() : String <<override>>
+  + run() <<override>>
+  + equals(o : Object) : boolean <<override>>
+  + hashCode() : int <<override>>
+}
+class Menu #bfbfbf {
+  # pre : Object
+  # items : MenuItem[] <<ArrayList>>
+  + result : StringBuilder
+  # post : Object
+  - scanner : Scanner
+--
+  + Menu(pre : Object, post : Object, items : MenuItem...)
+  + Menu()
+  + addMenuItem(item : MenuItem)
+  + run()
+  + runOnce()
+  + run(itemNumber : int)
+  + toString() : String <<override>>
+  + equals(o : Object) : boolean <<override>>
+  + hashCode() : int <<override>>
+..
+  + {static} getString(prompt : String) : String
+  + {static} getInt(prompt : String) : Integer
+  + {static} getDouble(prompt : String) : Double
+  + {static} getChar(prompt : String) : Character
+  + {static} getBoolean(prompt : String) : Boolean
+  + {static} selectItemFromArray(prompt : String, array : Object[]) : Integer
+  + {static} selectItemFromList(prompt : String, list : List) : Integer
+  + {static} selectFile(prompt : String, starting : File, filter : FilenameFilter) : File
+  + {static} arrayToString(title : String, array : Object[], bullet : Character) : String
+  + {static} listToString(title : String, list : List, bullet : Character) : String
+..
+  - recursiveAppend(sb : StringBuilder, addendum : Object)
+}
+}
+
+
+Runnable <|.. MenuItem
+Runnable <|.. Menu
+Menu o- MenuItem
+@enduml
+

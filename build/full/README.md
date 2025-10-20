@@ -1,5 +1,7 @@
 # Full build.xml
 
+UPDATE: The menu package has been added to the Javadoc generation list.
+
 This build.xml file is suitable for the class project. 
 
 * ``ant`` or ``ant compile`` will build Java source files from the specified subdirectory (default is "src") to the specified class file subdirectory (default is "target"), thus keeping the source files and class files separate. 
