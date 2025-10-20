@@ -1,0 +1,142 @@
+@startuml
+set separator none
+skinparam classAttributeIconSize 0
+hide circle
+
+package rating {
+class Comment {
+ - text : String
+ - author : Person
+ - inReplyTo : Comment
+ - replies : Comment[] <<ArrayList>>
+ + Comment(text : String, author : Person, inReplyTo : Comment)
+ + addReply(text : String, author : Person)
+ + numReplies() : int
+ + getReply(index : int) : Comment
+ + toString() : String <<override>>
+}
+
+interface Rateable <<interface>> {
+ + addRating(rating : Rating)
+ + getAverageRating() : double
+ + getRatings() : Rating[]
+}
+
+class Rating {
+ - stars : int
+ - review : Comment
+ - Rating(stars : int, review : Comment)
+ + getStars() : int
+ + getReview() : Comment
+ + toString() : String <<override>>
+}
+}
+
+package people {
+class Person {
+ # name : String
+ # email : String
+ - ratings : Rating[] <<ArrayList>>
+--
+ + Person(name : String, email : String)
+ + toString() : String <<override>>
+ + equals(o : Object) : boolean <<override>>
+ + hashCode() : int <<override>>
+..
+ + addRating(rating : Rating) <<override>>
+ + getAverageRating() : double <<override>>
+ + getRatings() : Rating[] <<override>>
+}
+class Student {
+ - {static} nextStudentID : int
+ - studentID : int
+ - courses : Course[] <<ArrayList>>
+' - balanceOwed : int
+ + Student(name : String, email : String)
+ + addCourse(course : Course)
+ + getCourses() : Course[]
+ + toString() : String <<override>>
+}
+class Tutor {
+ - bio : String
+ - ssn : int
+ - course : Course
+ + Tutor(name : String, email : String, ssn : int, bio : String, course : Course)
+ + getSSN() : int
+ + getBio() : String
+ + getCourse() : Course
+' - expertise : Subject[]
+'  - salary : int
+'  - availability : DateRange[]
+}
+}
+
+package session{
+class Course {
+ -dept : String
+ -number : int
+ + Course(dept : String, number : int)
+ + toString() : String <<override>>
+ + equals(o : Object) : boolean <<override>>
+ + hashCode() : int <<override>>
+}
+class InvalidCourseException {
+ + InvalidCourseException(dept : String)
+ + InvalidCourseException(dept : String, number : int)
+}
+
+class DateRange #FFFF00 {
+ - date : String
+ - startTime : String
+ - endTime : String
+' - start : ZonedDateTime
+' - end : ZonedDateTime
+ + DateRange(date : String, startTime : String, endTime : String)
+ + DateRange(date : String, startTime : String, duration : long)
+ + duration() : long <<minutes>>
+' + isWithin(date : ZonedDateTime) : boolean
+ + toString() : String <<override>>
+}
+
+class Session #FFFF00 {
+ - course : Course
+ - dates : DateRange
+ - tutor : Tutor
+ - students : Student[] <<ArrayList>>
+' - fee : int
+' - tutorWasPaid : boolean
+ + Session(course : Course, tutor : Tutor)
+ + setSchedule(date : String, startTime : String, duration : long)
+ + addStudent(student : Student)
+ + toString() : String <<override>>
+}
+}
+package java.lang {
+class IllegalArgumentException #bfbfbf {
+ + IllegalArgumentException(s: String)
+}
+}
+
+Rating <- Rateable
+Rating --> Comment
+Comment -> Person
+
+' Student <-- Session
+' Tutor <-- Session 
+Course --o Session
+Session *-- DateRange
+
+Rateable <|.. Person
+Person <|-- Student
+Person <|-- Tutor
+Student o-- Course
+Tutor o-- Course
+Course ..> InvalidCourseException
+IllegalArgumentException <|-- InvalidCourseException
+
+Note bottom of session 
+  Add JavaDoc to non-private members
+  of the DateRange and Session classes
+end Note
+
+@enduml
