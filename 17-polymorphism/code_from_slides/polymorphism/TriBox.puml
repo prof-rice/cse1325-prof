@@ -1,0 +1,30 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Box {
+#length :double
+#width : double
+#height : double
++Box(length :double, width : double, height : double)
++volume() : double
++toString() : String <<override>>
+}
+
+enum Shape <<enum>> {
++Right
++Equilateral
++Isosceles
++Scalene
+}
+
+class TriBox extends Box {
+-shape : Shape
++TriBox(length :double, width : double, height : double, shape : Shape)
++volume() : double <<override>>
++getShape() : Shape
++toString() : String <<override>>
+}
+
+TriBox +-- Shape
+@enduml

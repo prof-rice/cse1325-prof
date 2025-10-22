@@ -1,0 +1,19 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class A {
+ - b : B
+}
+class B {
+ - c : C
+}
+class C {
+ - a : A
+}
+
+A --> B
+B --> C
+C -> A
+
+@enduml

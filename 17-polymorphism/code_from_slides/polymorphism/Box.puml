@@ -1,0 +1,19 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Box {
+  # length : double
+  # width : double
+  # breadth : double
+  + Box(length : double, width : double, breadth : double)
+  + volume() : double
+  + toString() : string <<override>>
+}
+class TriBox extends Box {
+  + TriBox(length : double, width : double, breadth : double)
+  + volume() : double <<override>>
+  + toString() : string <<override>>
+} 
+@enduml
+
