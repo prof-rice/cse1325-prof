@@ -1,0 +1,53 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Reader { }
+
+class BufferedReader extends Reader{ }
+
+class StringReader extends Reader{ }
+
+class InputStreamReader extends Reader { }
+
+class FileReader extends InputStreamReader { }
+
+
+class Writer { }
+
+class BufferedWriter extends Writer{ }
+
+class StringWriter extends Writer{ }
+
+class PrintWriter extends Writer { }
+
+class OutputStreamWriter extends Writer { }
+
+class FileWriter extends OutputStreamWriter { }
+
+
+class InputStream { }
+
+class FileInputStream extends InputStream { }
+
+class FilterInputStream extends InputStream { }
+
+class BufferedInputStream extends FilterInputStream { }
+
+
+
+class OutputStream { }
+
+class FileOutputStream extends OutputStream { }
+
+class FilterOutputStream extends OutputStream { }
+
+class BufferedOutputStream extends FilterOutputStream { }
+
+class PrintStream extends FilterOutputStream { }
+
+
+class RandomAccessFile { }
+
+@enduml
+
