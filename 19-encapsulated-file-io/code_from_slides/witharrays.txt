@@ -1,0 +1,29 @@
+3
+Hello, World!
+42
+3.14
+x
+true
+Aloha, World!
+97
+2.72
+y
+false
+Yasou, World!
+13
+1.41
+z
+true
+12
+10
+85
+55
+74
+17
+74
+8
+60
+25
+92
+7
+79
