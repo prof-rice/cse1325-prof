@@ -17,12 +17,13 @@ public class CharDemo {
         // Conversions between char, Character, and codepoint
         //   (most conversions between char and Character are handled by autoboxing)
         Character character = '0';                    // Construct a Character (NO constructor!)
-        char   zero  = character.charValue();         // convert Character to char
-        int codepoint = (int) zero;                   // cast    char to code point
-        String zeroS = character.toString();          // convert Character to String
-        String zeros = Character.toString(zero);      // convert char to String (or use +)
-        String zeroz = Character.toString(codepoint); // convert code point to String
-        char[] zeroc = Character.toChars(codepoint);  // convert code point to char
+        char   zero      = character;                     // convert Character to char (autoboxing!)
+        Character zeroC  = zero;                          // convert char to Character (autoboxing!)
+        int codepoint    = (int) zero;                    // cast    char to code point
+        String zeroS     = character.toString();          // convert Character to String
+        String zeros     = Character.toString(zero);      // convert char to String (or use +)
+        String zeroz     = Character.toString(codepoint); // convert code point to String
+        char[] zeroc     = Character.toChars(codepoint);  // convert code point to char
         System.out.println("Zero is "   + zero + " "  + codepoint + " " +
                             zeroS + " " + zeros + " " + zeroz     + " " +
                             zeroc[0]);
