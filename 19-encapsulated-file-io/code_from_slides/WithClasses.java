@@ -4,7 +4,6 @@ import java.math.BigInteger;
 
 import java.io.PrintStream;
 import java.io.File;
-import java.io.IOException;
 
 import java.util.Scanner;
 import java.util.Objects;
@@ -16,13 +15,13 @@ public class WithClasses {
         this.bi = bi;
     }
     
-    public WithClasses(Scanner in) throws IOException {
+    public WithClasses(Scanner in) {
         this.simple = new Simple(in);
         this.color = new Color(in.nextInt()); in.nextLine();
         this.bi = new BigInteger(in.nextLine()); 
     }
     
-    public void save(PrintStream out) throws IOException {
+    public void save(PrintStream out) {
         simple.save(out);
         out.println(color.getRGB());
         out.println("" + bi);

@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import java.io.PrintStream;
 import java.io.File;
-import java.io.IOException;
 
 import java.util.Scanner;
 import java.util.Random;
@@ -18,7 +17,7 @@ public class WithArrays {
         while(numInts-- > 0) ints.add(random.nextInt(100));
     }
 
-    public WithArrays(Scanner in) throws IOException {
+    public WithArrays(Scanner in) {
         int size = in.nextInt(); in.nextLine();     // Length of array
         simples = new Simple[size];                 // Instance the array
         for(int i=0; i<size; ++i) simples[i] = new Simple(in);
@@ -30,7 +29,7 @@ public class WithArrays {
         }
     }
     
-    public void save(PrintStream out) throws IOException {
+    public void save(PrintStream out) {
         out.println("" + simples.length);     // Length of array
         for(Simple s : simples) s.save(out);  // Save the elements
         

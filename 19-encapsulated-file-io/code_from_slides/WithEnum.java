@@ -1,6 +1,5 @@
 import java.io.PrintStream;
 import java.io.File;
-import java.io.IOException;
 
 import java.util.Scanner;
 import java.util.Objects;
@@ -19,12 +18,12 @@ class Flag {
         this.color2 = color2;
         this.color3 = color3;
     }
-    public Flag(Scanner in) throws IOException {
+    public Flag(Scanner in) {
         color1 = Color.valueOf(in.nextLine());
         color2 = Color.valueOf(in.nextLine());
         color3 = Color.valueOf(in.nextLine());
     }
-    public void save(PrintStream out) throws IOException {
+    public void save(PrintStream out) {
         out.println(color1.name());
         out.println(color2.name());
         out.println(color3.name());
