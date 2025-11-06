@@ -1,0 +1,24 @@
+@startuml
+skinparam classAttributeIconSize 0
+' skinparam backgroundColor #D3D3D3
+set separator none
+hide circle
+
+package java.lang {
+interface Runnable <<interface>> {
+  +{abstract} run()
+}
+}
+
+
+class MenuItem {
+  - menuText : Object
+  - menuResponse : Runnable
+  + MenuItem(menuText : Object, menuResponse : Runnable)
+  + toString() : String <<override>>
+  +run() <<override>>
+}
+
+Runnable <|-- MenuItem
+@enduml
+

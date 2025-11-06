@@ -1,0 +1,246 @@
+@startuml
+set separator none
+skinparam classAttributeIconSize 0
+hide circle
+
+package rating {
+class Comment {
+ - text : String
+ - author : Person
+ - inReplyTo : Comment
+ - replies : Comment[] <<ArrayList>>
+ + Comment(text : String, author : Person, inReplyTo : Comment)
+ + Comment(in : Scanner)
+ + save(out : PrintStream)
+ + addReply(text : String, author : Person)
+ + numReplies() : int
+ + getReply(index : int) : Comment
+ + toString() : String <<override>>
+}
+
+interface Rateable <<interface>> #bfbfbf {
+ + addRating(rating : Rating)
+ + getAverageRating() : double
+ + getRatings() : Rating[]
+}
+
+class Rating {
+ - stars : int
+ - review : Comment
+ + Rating(stars : int, review : Comment)
+ + Rating(in : Scanner)
+ + save(out : PrintStream)
+ + getStars() : int
+ + getReview() : Comment
+ + toString() : String <<override>>
+}
+}
+
+package people {
+class Person {
+ # name : String
+ # email : String
+ - ratings : Rating[] <<ArrayList>>
+--
+ + Person(name : String, email : String)
+ + Person(in : Scanner)
+ + save(out : PrintStream)
+ + getName() : String
+ + toString() : String <<override>>
+ + equals(o : Object) : boolean <<override>>
+ + hashCode() : int <<override>>
+..
+ + addRating(rating : Rating) <<override>>
+ + getAverageRating() : double <<override>>
+ + getRatings() : Rating[] <<override>>
+}
+class Student {
+ - {static} nextStudentID : int
+ - studentID : int
+ - courses : Course[] <<ArrayList>>
+' - balanceOwed : int
+ + Student(name : String, email : String)
+ + Student(in : Scanner)
+ + save(out : PrintStream)
+ + addCourse(course : Course)
+ + getCourses() : Course[]
+ + toString() : String <<override>>
+}
+class Tutor {
+ - bio : String
+ - ssn : int
+ - course : Course
+ + Tutor(name : String, email : String, ssn : int, bio : String, course : Course)
+ + Tutor(in : Scanner)
+ + save(out : PrintStream)
+ + getSSN() : int
+ + getBio() : String
+ + getCourse() : Course
+' - expertise : Subject[]
+'  - salary : int
+'  - availability : DateRange[]
+}
+}
+
+package session{
+class Course {
+ -dept : String
+ -number : int
+ + Course(dept : String, number : int)
+ + Course(in : Scanner)
+ + save(out : PrintStream)
+ + toString() : String <<override>>
+ + equals(o : Object) : boolean <<override>>
+ + hashCode() : int <<override>>
+}
+class InvalidCourseException #bfbfbf {
+ + InvalidCourseException(dept : String)
+ + InvalidCourseException(dept : String, number : int)
+}
+
+class DateRange {
+ - date : String
+ - startTime : String
+ - endTime : String
+' - start : ZonedDateTime
+' - end : ZonedDateTime
+ + DateRange(date : String, startTime : String, endTime : String)
+ + DateRange(date : String, startTime : String, duration : long)
+ + DateRange(in : Scanner)
+ + save(out : PrintStream)
+ + duration() : long <<minutes>>
+' + isWithin(date : ZonedDateTime) : boolean
+ + toString() : String <<override>>
+}
+
+class Session {
+ - course : Course
+ - dates : DateRange
+ - tutor : Tutor
+ - students : Student[] <<ArrayList>>
+' - fee : int
+' - tutorWasPaid : boolean
+ + Session(course : Course, tutor : Tutor)
+ + Session(in : Scanner)
+ + save(out : PrintStream)
+ + setSchedule(date : String, startTime : String, duration : long)
+ + addStudent(student : Student)
+ + toString() : String <<override>>
+}
+}
+package java.lang {
+class IllegalArgumentException #bfbfbf {
+ + IllegalArgumentException(s: String)
+}
+}
+
+class Runnable <<interface>> #bfbfbf  {
+  +{abstract} run()
+}
+
+package menu {
+class MenuItem #bfbfbf {
+  - menuText : Object
+  - menuResponse : Runnable
+  + MenuItem(menuText : Object, menuResponse : Runnable)
+  + toString() : String <<override>>
+  + run() <<override>>
+  + equals(o : Object) : boolean <<override>>
+  + hashCode() : int <<override>>
+}
+class Menu #bfbfbf {
+  # pre : Object
+  # items : MenuItem[] <<ArrayList>>
+  + result : StringBuilder
+  # post : Object
+  - scanner : Scanner
+--
+  + Menu(pre : Object, post : Object, items : MenuItem...)
+  + Menu()
+  + addMenuItem(item : MenuItem)
+  + run()
+  + runOnce()
+  + run(itemNumber : int)
+  + toString() : String <<override>>
+  + equals(o : Object) : boolean <<override>>
+  + hashCode() : int <<override>>
+..
+  + {static} getString(prompt : String) : String
+  + {static} getInt(prompt : String) : Integer
+  + {static} getDouble(prompt : String) : Double
+  + {static} getChar(prompt : String) : Character
+  + {static} getBoolean(prompt : String) : Boolean
+  + {static} selectItemFromArray(prompt : String, array : Object[]) : Integer
+  + {static} selectItemFromList(prompt : String, list : List) : Integer
+  + {static} selectFile(prompt : String, starting : File, filter : FilenameFilter) : File
+  + {static} arrayToString(title : String, array : Object[], bullet : Character) : String
+  + {static} listToString(title : String, list : List, bullet : Character) : String
+..
+  - recursiveAppend(sb : StringBuilder, addendum : Object)
+}
+}
+
+package mdi {
+class MavTutor #d2b55b {
+  - menu : Menu
+  - view : List
+  - file : File
+  - dirty : boolean
+..
+  - courses : Course[] <<ArrayList>>
+  - students : Student[] <<ArrayList>>
+  - tutors : Tutor[] <<ArrayList>>
+  - sessions : Session[] <<ArrayList>>
+--
+  + MavTutor()
+  + {static} main(args : String[])
+  + toString() : String <<override>>
+..
+  - quit()
+  - selectView(list : List)
+  - newCourse()
+  - newStudent()
+  - newTutor()
+  - newSession()
+..
+  - newz() 
+  - save()
+  - saveAs()
+  - open()
+  - safeToDiscardData() : boolean
+}
+}
+
+Comment -[hidden]- MavTutor
+MavTutor *- people
+MavTutor *- session
+
+Menu .|> Runnable
+MenuItem .|> Runnable
+Menu o-- MenuItem
+MavTutor - Menu
+
+Rating <- Rateable
+Rating --> Comment
+Comment -> Person
+
+' Student <-- Session
+' Tutor <-- Session 
+Course --o Session
+Session *-- DateRange
+
+Rateable <|.. Person
+Person <|-- Student
+Person <|-- Tutor
+Student o-- Course
+Tutor o-- Course
+Course ..> InvalidCourseException
+IllegalArgumentException <|-- InvalidCourseException
+
+Note right of rating
+  You may skip saving this package
+  if you prefer. We'll implement the
+  user interface for rating next sprint!
+end Note
+
+@enduml
