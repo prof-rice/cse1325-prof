@@ -74,7 +74,7 @@ public class Session {
      * }</pre>
      * 
      * If the session is not yet scheduled, the date and time is reported
-     * as "at an unspecified date". 
+     * as "at an unspecified date". StringBuilder
      * <p/>
      * If no students have yet enrolled in this session, "Students:" is
      * replaced with "No students are assigned to this session".
