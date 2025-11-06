@@ -1,0 +1,46 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+interface Comparable<T> #yellow {
+  + compareTo(o : T)
+}
+
+interface List<E> #yellow { }
+interface Queue<E> #yellow { }
+interface Deque<E> #yellow { }
+interface Set<E> #yellow { }
+interface Map<K,V> #yellow { }
+
+class ArrayList<E> #LightPink { }
+ArrayList -[dashed]-|> List
+
+class Vector<E> #LightPink { }
+Vector -[dashed]-|> List
+
+' class ArrayDeque<E> #Moccasin { }
+' ArrayDeque -[dashed]-|> Deque
+' ArrayDeque -[dashed]-|> Queue
+
+
+class LinkedList<E> #Moccasin/LightPink { }
+List <|-[dashed]- LinkedList
+Deque <|-[dashed]- LinkedList
+Queue <|-[dashed]- LinkedList
+
+class HashSet<E> #LightSkyBlue { }
+HashSet -[dashed]-|> Set
+class TreeSet<T> #LightSkyBlue { }
+TreeSet -[dashed]-|> Set
+
+class HashMap<K,V> #PHYSICAL { }
+HashMap -[dashed]-|> Map
+class TreeMap<T,V> #PHYSICAL { }
+TreeMap -[dashed]-|> Map
+
+Comparable <|-[dashed]  T
+Set -[hidden]- T
+Map -[hidden]- T
+
+@enduml
+
