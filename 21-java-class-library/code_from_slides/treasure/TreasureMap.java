@@ -45,8 +45,8 @@ class Coordinate implements Comparable<Coordinate> {
     }
     @Override
     public int compareTo(Coordinate coordinate) {
-        int result = latitude.getDegrees().compareTo(coordinate.latitude.getDegrees());
-        if(result == 0) result = longitude.getDegrees().compareTo(coordinate.longitude.getDegrees());
+        int result = result = longitude.getDegrees().compareTo(coordinate.longitude.getDegrees());
+        if(result == 0) latitude.getDegrees().compareTo(coordinate.latitude.getDegrees());
         return result;
     }
     @Override
