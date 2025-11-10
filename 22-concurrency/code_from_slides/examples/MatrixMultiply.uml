@@ -1,0 +1,25 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Matrix {
+  -random : Random
+  -matrix : int[][]
+  +SIZE : int <<final>>
+  +Matrix(size : int)
+  +fill()
+  +get(row : int, col : int) : int
+  +set(row : int, col : int, value : int)
+  +multiple(rhs : Matrix) : Matrix
+  -multipleCell(rhs : Matrix, row : int, col : int)
+  +xor() : int
+}
+
+class MatrixMultiply {
++SIZE : int <<final>>
++multiply(matrices : int)
++{static} main(args : String[])
+}
+
+MatrixMultiply -> Matrix
+@enduml
