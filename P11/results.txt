@@ -1,0 +1,132 @@
+Full Credit
+===========
+
+1. Number of cores available to my test environment (in bash use the ``nproc`` command, otherwise check your system control panel): 
+
+2. Primes range for my machine, begin to end (must run at least 45 seconds "real" / wall time with a single thread): 
+
+3. Timing measured on my machine with EXACTLY the same begin and end values for each!
+
+With 1 thread:
+
+real 
+user 
+sys  
+
+
+With 2 threads:
+
+real 
+user 
+sys  
+
+
+With 3 threads:
+
+real	
+user	
+sys	
+
+
+With 4 threads:
+
+real	
+user	
+sys	
+
+
+With 5 threads:
+
+real	
+user	
+sys	
+
+
+With 6 threads:
+
+real	
+user	
+sys	
+
+
+With 7 threads:
+
+real	
+user	
+sys	
+
+
+With 8 threads:
+
+real	
+user	
+sys	
+
+
+With 16 threads:
+
+real	
+user	
+sys	
+
+
+With 32 threads:
+
+real	
+user	
+sys	
+
+
+With 64 threads:
+
+real	
+user	
+sys	
+
+
+QUESTION: After threading is added, is the order of the prime numbers listed the same or does it vary? Why?
+
+
+
+
+QUESTION: Does adding more threads continue to speed up the program? Do more threads ever slow down the program slightly?  Why or why not?
+
+
+
+
+QUESTION: Does adding more threads increase the "system load" (sys), or is it constant regardless of the number of threads?  Why?
+
+
+
+Bonus
+=====
+
+After "load balancing" your code by using a thread pool as discussed in the PDF, rerun the test with the same number of threads as your test environment has cores. For example, on a 4-core machine, run your code with 4 threads and record the time below.
+
+Number of cores: 
+
+Load Balanced
+-------------
+
+Measure the time using your Bonus solution:
+
+real	
+user	
+sys	
+
+NOT Load Balanced
+-----------------
+
+Copy the time for the same number of cores from the Full Credit section:
+
+real	
+user	
+sys	
+
+QUESTION: What difference does a load balanced thread pool make in execution time?
+
+
+
+QUESTION: Do you consider the thread pool code to be easier or more difficult to write, debug, and maintain than the hard-coded slices from Full Credit?
+
+
