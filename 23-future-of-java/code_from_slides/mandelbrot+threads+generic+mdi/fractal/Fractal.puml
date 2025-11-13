@@ -1,0 +1,29 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+package fractal {
+class Mandelbrot {
+  - width : int
+  - height : int
+  - icount : int
+  - nextY : int
+  - fivePercent : int
+  - zoom : double
+  - ratio : double
+  - xOffset : double
+  - yOffset : double
+  - colors : int[][] <<width x height>>
+  - milliseconds : long
+  + Mandelbrot(width : int, height : int, icount : int, zoom : double, xOffset : double, yOffset : double, threads : int)
+  - nextRow() : int <<synchronized>>
+  + calculateImageViaPool(numThreads : int)
+  + calculateRow(y : int)
+  + calculatePoint(x : int, y : int)
+  + getMilliseconds() : long
+}
+}
+
+@enduml
+
+

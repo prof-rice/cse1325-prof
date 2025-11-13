@@ -1,0 +1,128 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+package fractal {
+class Mandelbrot {
+  - width : int
+  - height : int
+  - icount : int
+  - nextY : int
+  - fivePercent : int
+  - zoom : double
+  - ratio : double
+  - xOffset : double
+  - yOffset : double
+  - colors : int[][] <<width x height>>
+  - milliseconds : long
+  + Mandelbrot(width : int, height : int, icount : int, zoom : double, xOffset : double, yOffset : double, threads : int)
+  - nextRow() : int <<synchronized>>
+  + calculateImageViaPool(numThreads : int)
+  + calculateRow(y : int)
+  + calculatePoint(x : int, y : int)
+  + getMilliseconds() : long
+}
+}
+package mdi {
+class History<E> {
+  - history : Deque<E> <<LinkedList>>
+  - maxSize : int
+  + History(maxSize : int, entries : E...)
+  + add(item : E)
+  + toString() : String <<override>>
+}
+class Fractals {
+  + Fractals()
+  + toString() : String <<override>>
+  + {static} main(args : String[])
+..
+  - exit()
+  - showFractal()
+  - changeSize()
+  - changeICount()
+  - changeZoom()
+  - changeXOffset()
+  - changeYOffset()
+  - changeThreads()
+..
+  - newz()
+  - save()
+  - saveAs()
+  - open()
+..
+  - setPPMFile()
+  - setViewer()
+}
+}
+
+package menu {
+class MenuItem {
+  - menuText : Object
+  - menuResponse : Runnable
+  + MenuItem(menuText : Object, menuResponse : Runnable)
+  + toString() : String <<override>>
+  + run() <<override>>
+}
+class Menu {
+  # pre : Object
+  - items : MenuItem[] <<ArrayList>>
+  + result : StringBuilder
+  # post : Object
+--
+  + Menu(pre : Object, post : Object, items : MenuItem...)
+  + addMenuItem(item : MenuItem)
+  + run(itemNumber : int)
+  + runOnce()
+  + run()
+  + toString() : String <<override>>
+}
+}
+
+package complex {
+class Complex {
+  - x : double
+  - y : double
+--
+  + Complex(x : double, y : double)
+  + Complex()
+  + Complex(in : Scanner)
+  + save(out : PrintStream)
+..
+  + getReal() : double
+  + getImaginary() : double
+..
+  + abs() : double
+  + theta() : double
+  + scale(alpha : double) : Complex
+  + conjugate() : Complex
+  + reciprocal() : Complex
+..
+  + plus(c : Complex) : Complex
+  + minus(c : Complex) : Complex
+  + times(c : Complex) : Complex
+  + divide(c : Complex) : Complex
+..
+  + exp() : Complex
+  + sin() : Complex
+  + cos() : Complex
+  + tan() : Complex
+..
+  + toString() : String <<override>>
+  + equals(o : Object) : boolean <<override>>
+  + hashCode() : int <<override>>
+}
+}
+
+History <- Fractals
+Mandelbrot <-- Fractals
+Mandelbrot -> Complex
+
+' Runnable <|.. MenuItem
+' Runnable <|.. Menu
+' menu .|> Runnable
+' MenuItem .|> Runnable
+' Menu .|> Runnable
+Menu o- MenuItem
+
+Fractals -> Menu
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+package mdi {
+class History<E> {
+  - history : Deque<E> <<LinkedList>>
+  - maxSize : int
+  + History(maxSize : int, entries : E...)
+  + add(item : E)
+  + toString() : String <<override>>
+}
+class Fractals {
+  + Fractals()
+  + toString() : String <<override>>
+  + {static} main(args : String[])
+..
+  - exit()
+  - showFractal()
+  - changeSize()
+  - changeICount()
+  - changeZoom()
+  - changeXOffset()
+  - changeYOffset()
+  - changeThreads()
+..
+  - newz()
+  - save()
+  - saveAs()
+  - open()
+..
+  - setPPMFile()
+  - setViewer()
+}
+}
+
+@enduml
+
